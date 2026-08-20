@@ -4,6 +4,8 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
 import { LearningJourney } from './components/LearningJourney';
+import { CurrentlyExploring } from './components/CurrentlyExploring';
+import { GitHubContributions } from './components/GitHubContributions';
 import { Teaching } from './components/Teaching';
 import { Skills } from './components/Skills';
 import { Leadership } from './components/Leadership';
@@ -41,19 +43,25 @@ export function App() {
         {/* 4. Learning Journey */}
         <LearningJourney />
 
-        {/* 5. Teaching */}
+        {/* 5. Currently Exploring — Web3 & Blockchain */}
+        <CurrentlyExploring />
+
+        {/* 6. GitHub Contributions */}
+        <GitHubContributions />
+
+        {/* 7. Teaching */}
         <Teaching />
 
-        {/* 6. Skills */}
+        {/* 8. Skills */}
         <Skills />
 
-        {/* 7. Leadership & Community */}
+        {/* 9. Leadership & Community */}
         <Leadership />
 
-        {/* 8. Timeline + Where I'm Going */}
+        {/* 10. Timeline + Where I'm Going */}
         <Timeline />
 
-        {/* 9. Contact */}
+        {/* 11. Contact */}
         <Contact />
       </main>
 

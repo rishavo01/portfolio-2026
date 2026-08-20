@@ -21,6 +21,7 @@ const footerNav = [
   { label: 'Teaching', href: '#teaching' },
   { label: 'Skills', href: '#skills' },
   { label: 'Community', href: '#community' },
+  { label: 'GitHub Contributions', href: '#github' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -34,11 +35,16 @@ export const Footer: React.FC = () => {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <a href="#home" className="flex items-baseline gap-0.5 mb-3 group">
-              <span className="text-[18px] font-bold tracking-tight text-white group-hover:text-primary transition-colors">
-                {personal.firstName}
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
+            <a
+              href="#home"
+              aria-label="Home"
+              className="inline-flex items-center mb-4 group transition-transform hover:scale-105"
+            >
+              <img
+                src="/logo.png"
+                alt="Rishav Logo"
+                className="w-11 h-11 sm:w-12 sm:h-12 object-contain drop-shadow-sm transition-transform duration-200 group-hover:scale-105"
+              />
             </a>
             <p className="text-[13px] text-white/40 leading-relaxed mb-4">
               {personal.tagline}

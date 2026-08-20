@@ -11,6 +11,8 @@ export const personal = {
   school: 'Deerwalk Sifal School',
   level: '+2 Science',
   email: 'rishavkumarsingh012@gmail.com',
+  phone: '+977 9809657146',
+  whatsapp: 'https://wa.me/9779809657146',
   github: 'https://github.com/rishavo01',
   linkedin: 'https://www.linkedin.com/in/rishav-singh-521538369/',
   cv: '#',
@@ -211,6 +213,37 @@ export const skills = [
   },
 ];
 
+export const currentlyExploring = {
+  headline: 'Currently Exploring',
+  intro:
+    "I'm continuously expanding beyond traditional web development and exploring how decentralized technologies work.",
+  cards: [
+    {
+      title: 'Web3 Development',
+      status: 'Currently Learning',
+      description:
+        'Exploring decentralized application architecture, wallets, blockchain networks, Web3 APIs, and how applications interact with decentralized systems.',
+      topics: ['Web3', 'dApps', 'Wallets', 'Blockchain APIs', 'Decentralized Applications'],
+      icon: 'globe',
+    },
+    {
+      title: 'Blockchain',
+      status: 'Currently Learning',
+      description:
+        'Learning the fundamentals of blockchain technology, including how transactions, blocks, consensus, smart contracts, and decentralized networks work.',
+      topics: ['Blockchain Fundamentals', 'Smart Contracts', 'Transactions', 'Consensus', 'Decentralized Networks'],
+      icon: 'link',
+    },
+  ],
+};
+
+export const githubConfig = {
+  username: 'rishavo01',
+  profileUrl: 'https://github.com/rishavo01',
+  label: 'GitHub Contributions',
+  subtitle: 'Building consistently. Learning in public.',
+};
+
 export const leadership = {
   headline: "Beyond the Code",
   subtitle: "I actively learn from the developer community outside my own projects.",
@@ -221,7 +254,7 @@ export const leadership = {
       type: 'Hackathon',
       description:
         'My first experience organizing a hackathon — student-led planning, coordination, and execution. Working under pressure to create opportunities for younger students.',
-      learned: ['Leadership', 'Logistics', 'Team coordination', 'Problem solving', 'Event execution'],
+      learned: ['Leadership', 'Out Reach', 'Team coordination', 'Problem solving', 'Event execution'],
       highlight: 'First time organizing a hackathon. Learned more from the chaos than from any class.',
     },
     {

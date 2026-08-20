@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Teaching', href: '#teaching' },
   { name: 'Skills', href: '#skills' },
   { name: 'Community', href: '#community' },
+  { name: 'GitHub Contributions', href: '#github' },
 ];
 
 const HEADER_OFFSET = 80;
@@ -35,11 +36,15 @@ export const Header: React.FC = () => {
       setScrolled(window.scrollY > 20);
       const scrollPos = window.scrollY + HEADER_OFFSET;
       let current = 'home';
+      let maxDocTop = -1;
       for (const link of navLinks) {
         const el = document.getElementById(link.href.slice(1));
         if (el) {
           const docTop = el.getBoundingClientRect().top + window.scrollY;
-          if (docTop <= scrollPos) current = link.href.slice(1);
+          if (docTop <= scrollPos && docTop > maxDocTop) {
+            maxDocTop = docTop;
+            current = link.href.slice(1);
+          }
         }
       }
       setActiveSection(current);
@@ -59,12 +64,17 @@ export const Header: React.FC = () => {
       }`}
     >
       <div className="max-w-[1240px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <a href="#home" className="flex items-center gap-1.5 group">
-          <span className="text-[17px] font-bold tracking-tight text-ink group-hover:text-primary transition-colors">
-            {personal.firstName}
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
+        {/* Brand Logo */}
+        <a
+          href="#home"
+          aria-label="Home"
+          className="flex items-center group transition-transform hover:scale-105"
+        >
+          <img
+            src="/logo.png"
+            alt="Rishav Logo"
+            className="w-10 h-10 sm:w-11 sm:h-11 object-contain drop-shadow-sm transition-transform duration-200 group-hover:scale-105"
+          />
         </a>
 
         {/* Desktop Nav */}
