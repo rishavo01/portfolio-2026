@@ -26,12 +26,14 @@ export const About: React.FC = () => {
             </h2>
 
             <p className="text-[15px] text-ink/70 leading-relaxed mb-5">
-              I'm Rishav — a student developer from Nepal exploring software engineering through real projects, backend development, AI, and DevOps.
+              I'm Rishav — a student developer, builder, and founder from Nepal.
+            </p>
+            <p className="text-[15px] text-ink/70 leading-relaxed mb-5">
+              I started with programming fundamentals and gradually moved into backend development,
+              full-stack applications, deployment, AI, and DevOps through building real software.
             </p>
             <p className="text-[15px] text-ink/70 leading-relaxed mb-8">
-              I started with programming fundamentals and gradually moved from basic Java concepts to backend development,
-              full-stack applications, deployment, AI, and DevOps. Not through courses alone — through building real things,
-              breaking them, debugging them, deploying them, and then teaching others what I learned.
+              Today, I'm also building MeroPharma, exploring Web3 and blockchain, and continuing to deepen my understanding of software engineering.
             </p>
 
             {/* Philosophy callout */}

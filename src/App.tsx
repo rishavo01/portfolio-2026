@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
+import { Experience } from './components/Experience';
 import { LearningJourney } from './components/LearningJourney';
 import { CurrentlyExploring } from './components/CurrentlyExploring';
 import { GitHubContributions } from './components/GitHubContributions';
@@ -39,6 +40,9 @@ export function App() {
 
         {/* 3. Projects */}
         <Projects />
+
+        {/* 3.5. Experience */}
+        <Experience />
 
         {/* 4. Learning Journey */}
         <LearningJourney />

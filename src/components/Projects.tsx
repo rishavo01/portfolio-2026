@@ -50,7 +50,7 @@ export const Projects: React.FC = () => {
 
         {/* === FEATURED === */}
         <div className="mb-6 group">
-          <SpotlightCard className="bg-white rounded-3xl border border-surface overflow-hidden hover:border-primary/40 hover:shadow-[0_12px_40px_-8px_rgba(22,58,95,0.12)] transition-all duration-300">
+          <SpotlightCard className="bg-white rounded-3xl border border-primary/20 shadow-[0_8px_30px_-8px_rgba(22,58,95,0.08)] overflow-hidden hover:border-primary/50 hover:shadow-[0_16px_50px_-10px_rgba(22,58,95,0.16)] transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
               <div className="relative overflow-hidden bg-gradient-to-br from-surface to-white min-h-[260px] lg:min-h-[380px]">
@@ -66,13 +66,27 @@ export const Projects: React.FC = () => {
               {/* Content */}
               <div className="p-8 lg:p-10 flex flex-col justify-between">
                 <div>
+                  {/* Eyebrow */}
+                  {featured.eyebrow && (
+                    <p className="text-[11px] font-black text-primary uppercase tracking-[0.15em] mb-3">
+                      {featured.eyebrow}
+                    </p>
+                  )}
+
                   {/* Top meta */}
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-[11px] font-bold text-primary uppercase tracking-[0.12em]">
-                      {featured.category}
-                    </span>
+                  <div className="flex items-center justify-between gap-3 mb-6">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[11px] font-bold text-primary/70 uppercase tracking-[0.12em]">
+                        {featured.category}
+                      </span>
+                      {featured.founderBadge && (
+                        <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold text-cream bg-ink px-2.5 py-1 rounded-full">
+                          {featured.founderBadge}
+                        </span>
+                      )}
+                    </div>
                     <span
-                      className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full border ${statusColors[featured.statusColor]}`}
+                      className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full border shrink-0 ${statusColors[featured.statusColor]}`}
                     >
                       <span className={`w-1.5 h-1.5 rounded-full ${statusDots[featured.statusColor]}`} />
                       {featured.status}
@@ -202,9 +216,36 @@ export const Projects: React.FC = () => {
                 </div>
 
                 {project.note && (
-                  <p className="text-[11.5px] text-ink/40 italic mt-auto pt-3 border-t border-surface">
+                  <p className="text-[11.5px] text-ink/40 italic mt-4 pt-3 border-t border-surface">
                     {project.note}
                   </p>
+                )}
+
+                {(project.github || project.demo) && (
+                  <div className="flex items-center gap-3 mt-auto pt-3">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[12px] text-ink/60 hover:text-ink transition-colors"
+                      >
+                        <GithubIcon />
+                        <span>GitHub</span>
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[12px] text-ink/60 hover:text-ink transition-colors"
+                      >
+                        <span>Live</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </SpotlightCard>

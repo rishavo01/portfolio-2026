@@ -99,7 +99,7 @@ export const Timeline: React.FC = () => {
             {/* Honesty note */}
             <div className="mt-8 border-t border-white/8 pt-6">
               <p className="text-[13px] text-white/30 italic leading-relaxed">
-                Still growing. Still exploring. Deliberately choosing depth over breadth.
+                I'm still exploring, but I'm deliberately choosing depth through building.
               </p>
             </div>
           </div>

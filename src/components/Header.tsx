@@ -5,6 +5,7 @@ import { personal } from '../data/portfolio';
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Learning', href: '#learning' },
   { name: 'Teaching', href: '#teaching' },
   { name: 'Skills', href: '#skills' },

@@ -22,7 +22,7 @@ export const hero = {
   greeting: 'Student Developer · Builder · Mentor',
   headline: 'I build software to understand how technology works — then share what I learn.',
   subtitle:
-    'Computer science student from Nepal exploring full-stack development, backend engineering, AI, and DevOps through real projects.',
+    'Student developer, builder, and founder from Nepal exploring full-stack development, backend engineering, AI, Web3, and DevOps through real projects.',
   primaryCta: { label: 'View My Work', href: '#projects' },
   secondaryCta: { label: 'About Me', href: '#about' },
   portrait: {
@@ -33,10 +33,9 @@ export const hero = {
 
 export const about = {
   headline: 'I learn by building.',
-  story: `I'm Rishav — a student developer from Nepal exploring software engineering through real projects, backend development, AI, and DevOps.
-I started with programming fundamentals and gradually moved from basic Java concepts to backend development,
-full-stack applications, deployment, AI, and DevOps. Not through courses alone — through building real things,
-breaking them, debugging them, deploying them, and then teaching others what I learned.`,
+  story: `I'm Rishav — a student developer, builder, and founder from Nepal.
+I started with programming fundamentals and gradually moved into backend development, full-stack applications, deployment, AI, and DevOps through building real software.
+Today, I'm also building MeroPharma, exploring Web3 and blockchain, and continuing to deepen my understanding of software engineering.`,
   philosophy: 'Frameworks change. Fundamentals stay.',
   motif: ['LEARN', 'BUILD', 'BREAK', 'DEBUG', 'DEPLOY', 'TEACH', 'REPEAT'],
   pillars: [
@@ -67,6 +66,8 @@ export interface Project {
   id: number;
   slug: string;
   title: string;
+  eyebrow?: string;
+  founderBadge?: string;
   category: string;
   size: 'featured' | 'medium' | 'experimental';
   problemStatement: string;
@@ -84,21 +85,24 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    slug: 'pharmacy-platform',
-    title: 'Pharmacy Management Platform',
+    slug: 'meropharma',
+    title: 'MeroPharma',
+    eyebrow: 'Founded · Full-Stack Product',
+    founderBadge: 'Founder & Builder',
     category: 'Full-Stack Product',
     size: 'featured',
     problemStatement:
-      'Pharmacies managing multiple stores had no unified system for inventory, sales, finance, and staff across locations.',
+      'Pharmacies managing multiple stores often need separate systems or manual processes for inventory, sales, finance, staff, and stock movement.',
     whatIBuilt:
-      'A multi-store pharmacy ERP with inventory management, medicine tracking, stock transfers, sales, finance, analytics, reports, user roles, real-time notifications, and role-based access control.',
+      'A multi-store pharmacy management platform with inventory management, medicine tracking, stock transfers, sales, finance, analytics, reports, user roles, real-time notifications, and role-based access control.',
     myContribution:
-      'Designed the full system architecture, built the backend API with Node.js + Express + Prisma, implemented authentication, RBAC, and real-time functionality with Socket.IO, and developed the React frontend.',
+      'Founder & primary builder — responsible for product development, technical architecture, implementation, deployment, and continuous improvement.',
     status: 'Active Development',
     statusColor: 'green',
     tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'JWT', 'RBAC', 'Socket.IO'],
     image: '/assets/project1.jpg',
-    note: 'A serious full-stack product built to solve operational problems in pharmacy management.',
+    demo: 'https://meropharma.com',
+    note: 'MeroPharma is a pharmacy management platform designed to help pharmacies manage inventory, sales, finance, staff, and day-to-day operations from one system.',
   },
   {
     id: 2,
@@ -116,6 +120,7 @@ export const projects: Project[] = [
     statusColor: 'blue',
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
     image: '/assets/project2.jpg',
+    demo: 'https://careconnect.rishavsingh.com.np/',
     note: 'Presented at CodeWalk — technology innovation exhibition at Deerwalk Sifal School.',
   },
   {
@@ -134,25 +139,26 @@ export const projects: Project[] = [
     statusColor: 'blue',
     tech: ['Java', 'Spring Boot', 'Angular', 'Spring Data JPA', 'MySQL', 'REST APIs'],
     image: '/assets/project3.jpg',
+    demo: 'https://chemical-inventory.rishavsingh.com.np/',
     note: 'Built while learning Java backend development — this project demonstrates learning through implementation.',
   },
   {
     id: 4,
     slug: 'farming-rover',
-    title: 'Smart Farming Helper Rover',
+    title: 'Krishi AI — Smart Farming Helper Rover',
     category: 'Hardware + AI Project',
     size: 'experimental',
     problemStatement:
-      'Small-scale farmers needed a low-cost way to monitor plant health without manual inspection of every plant.',
+      'A smart farming rover designed to help small-scale farmers monitor plant health with less manual inspection. The rover uses a rocker-bogie mechanism, green color detection to locate plants, and captures leaf images for AI-based analysis.',
     whatIBuilt:
       'A rocker-bogie mechanism rover with green color detection, plant tracking, and leaf image capture. The rover captured leaf images for AI-based plant health analysis.',
     myContribution:
-      'Trained the AI model for leaf disease identification — intended to detect healthy vs. diseased plants, identify disease type, and suggest possible treatments.',
+      'I trained the AI model used to analyze leaf images. Krishi AI is designed to detect whether a plant is healthy or diseased, identify the type of disease when detected, and suggest a possible treatment.',
     status: 'Exhibition Project',
     statusColor: 'amber',
-    tech: ['Python', 'Computer Vision', 'AI Model Training', 'Rocker-Bogie Mechanism'],
+    tech: ['Python', 'Computer Vision', 'AI Model Training', 'Rocker-Bogie Mechanism', 'Green Color Detection'],
     image: '/assets/project4.jpg',
-    note: 'Team project at the 30th SET Exhibition, St. Xavier\'s College. The learning mattered more than the result.',
+    note: 'Team project presented at the 30th SET Exhibition, St. Xavier\'s College, Maitighar — Inter-College category. We didn\'t win, but the project gave me practical experience in AI model training, computer vision, agriculture-focused problem solving, hardware integration, and teamwork. The learning mattered more than the result.',
   },
 ];
 
@@ -292,8 +298,53 @@ export const timeline = [
 
 export const whereImGoing = {
   headline: "Where I'm Going",
-  body: `I'm still figuring out exactly where I want to specialize. For now, I'm deliberately exploring the intersection of software engineering, backend systems, AI, and infrastructure.`,
-  directions: ['Software Engineering', 'Backend Engineering', 'AI', 'Developer Infrastructure', 'DevOps'],
+  body: `I'm exploring the intersection of software engineering, backend systems, AI, Web3, blockchain, and developer infrastructure — while building real products and learning through implementation.`,
+  directions: ['Software Engineering', 'Backend Engineering', 'AI', 'Web3 & Blockchain', 'DevOps & Infrastructure'],
+};
+
+export interface ExperienceEntry {
+  number: string;
+  eyebrow: string;
+  title: string;
+  duration?: string;
+  description: string;
+  focus: string[];
+  current?: boolean;
+  highlight?: string;
+}
+
+export const experience = {
+  headline: "Where I've worked and built.",
+  subtitle: 'Experience that shaped how I build software, work with teams, and solve real problems.',
+  entries: [
+    {
+      number: '01',
+      eyebrow: 'Internship',
+      title: 'Software Development Intern',
+      description:
+        'Gained practical experience working on software development in a professional environment, learning how real development workflows differ from classroom projects.',
+      focus: ['Software Development', 'Team Collaboration', 'Professional Workflow', 'Problem Solving'],
+    },
+    {
+      number: '02',
+      eyebrow: 'Inspired I.T. Services',
+      title: 'Software Developer',
+      duration: '~5 months',
+      description:
+        'Worked on real-world software and technology projects, gaining experience with application development, deployment, infrastructure, and solving practical client problems.',
+      focus: ['Full-Stack Development', 'Backend Development', 'Deployment', 'Linux / VPS', 'Client Projects', 'Problem Solving'],
+    },
+    {
+      number: '03',
+      eyebrow: 'MeroPharma',
+      title: 'Founder & Builder',
+      current: true,
+      description:
+        'Founded MeroPharma and built its pharmacy management platform from the ground up, combining product thinking with full-stack engineering.',
+      focus: ['Product Development', 'Technical Architecture', 'Full-Stack Development', 'Database Design', 'Deployment', 'Product Decisions', 'Problem Solving'],
+      highlight: 'Building a real product around a real operational problem in pharmacy management.',
+    },
+  ] as ExperienceEntry[],
 };
 
 export const contact = {
@@ -319,6 +370,7 @@ export default {
   hero,
   about,
   projects,
+  experience,
   learningJourney,
   teaching,
   skills,

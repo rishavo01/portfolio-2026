@@ -4,7 +4,6 @@ import { hero, personal } from '../data/portfolio';
 import { gsap } from '../lib/gsap';
 import { MagneticButton } from './ui/MagneticButton';
 import { ParticleBackground } from './ui/ParticleBackground';
-import { ShimmerBadge } from './ui/ShimmerBadge';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -72,15 +71,6 @@ export const Hero: React.FC = () => {
           { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power2.out' },
           '-=0.8'
         );
-
-      // Subtle ambient float on portrait
-      gsap.to(portraitRef.current, {
-        y: -8,
-        duration: 3.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -114,13 +104,16 @@ export const Hero: React.FC = () => {
           {/* Left: Text */}
           <div id="about-anchor" className="flex flex-col justify-center">
 
-            {/* Tagline shimmer pill */}
-            <div ref={badgeRef} className="mb-6 self-start">
-              <ShimmerBadge>
-                <span className="text-[12.5px] font-semibold text-ink tracking-wide uppercase">
-                  {hero.greeting}
-                </span>
-              </ShimmerBadge>
+            {/* Tagline pill */}
+            <div ref={badgeRef} className="inline-flex items-center gap-2 mb-6 self-start">
+              <span className="flex gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary/25" />
+              </span>
+              <span className="text-[13px] font-medium text-ink/60 tracking-wide uppercase">
+                {hero.greeting}
+              </span>
             </div>
 
             {/* Main headline */}
@@ -232,7 +225,7 @@ export const Hero: React.FC = () => {
               <img
                 src={hero.portrait.src}
                 alt={hero.portrait.alt}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover object-top"
               />
             </div>
 
