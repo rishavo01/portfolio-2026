@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { githubConfig } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { MagneticButton } from './ui/MagneticButton';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -53,7 +56,6 @@ const STROKE: Record<number, string> = {
 // Helpers
 // ─────────────────────────────────────────────────────────────
 
-/** ISO date string YYYY-MM-DD for a Date object, in local time. */
 function toYMD(d: Date): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -61,27 +63,18 @@ function toYMD(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-/**
- * Build a week-column grid starting from Monday.
- * Returns an array of columns; each column is an array of
- * { date, row } where row 0 = Monday.
- * Covers ~53 weeks ending today.
- */
 function buildWeekColumns(): Array<Array<{ date: Date; row: number }>> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Find the Monday on/before today
   const endMonday = new Date(today);
-  const dow = today.getDay(); // 0=Sun,1=Mon,...,6=Sat
-  const daysToMon = dow === 0 ? 6 : dow - 1; // days back to Monday
+  const dow = today.getDay();
+  const daysToMon = dow === 0 ? 6 : dow - 1;
   endMonday.setDate(endMonday.getDate() - daysToMon);
 
-  // Start 52 full weeks before that Monday
   const startMonday = new Date(endMonday);
   startMonday.setDate(startMonday.getDate() - 52 * 7);
 
-  // Build columns
   const columns: Array<Array<{ date: Date; row: number }>> = [];
   const cursor = new Date(startMonday);
 
@@ -99,7 +92,6 @@ function buildWeekColumns(): Array<Array<{ date: Date; row: number }>> {
 }
 
 function formatTooltipDate(ymd: string): string {
-  // Parse safely in local time
   const [y, m, d] = ymd.split('-').map(Number);
   const date = new Date(y, m - 1, d);
   return date.toLocaleDateString('en-US', {
@@ -132,7 +124,7 @@ export const GitHubContributions: React.FC = () => {
     visible: false, col: 0, row: 0, date: '', count: 0,
   });
 
-  // ── Fetch ──────────────────────────────────────────────────
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
 
   useEffect(() => {
     let cancelled = false;
@@ -158,19 +150,14 @@ export const GitHubContributions: React.FC = () => {
     return () => { cancelled = true; };
   }, []);
 
-  // ── Grid ───────────────────────────────────────────────────
-
   const columns = buildWeekColumns();
 
-  // Month label: place a label when the first day of a new month
-  // appears in row 0 of a column
   const monthLabels: { label: string; col: number }[] = [];
   let lastMonth = -1;
   columns.forEach((col, ci) => {
     const firstDay = col[0].date;
     const m = firstDay.getMonth();
     if (m !== lastMonth) {
-      // Only label if there's room (skip first col to avoid clipping)
       if (ci > 0) monthLabels.push({ label: MONTH_NAMES[m], col: ci });
       lastMonth = m;
     }
@@ -179,16 +166,15 @@ export const GitHubContributions: React.FC = () => {
   const svgWidth  = MARGIN_LEFT + columns.length * CELL_STEP;
   const svgHeight = MARGIN_TOP  + 7 * CELL_STEP;
 
-  // ── Tooltip pixel position (relative to SVG origin) ───────
-
   const tooltipSvgX = MARGIN_LEFT + hover.col * CELL_STEP + CELL_SIZE / 2;
   const tooltipSvgY = MARGIN_TOP  + hover.row * CELL_STEP - 8;
 
-  // ── Render ─────────────────────────────────────────────────
-
   return (
-    <section id="github" className="py-20 md:py-28 bg-ink scroll-mt-16">
-      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+    <section id="github" ref={sectionRef} className="py-20 md:py-28 bg-ink scroll-mt-16 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full bg-[#26a641]/5 blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
 
         {/* ── Section label ─────────────────────────── */}
         <div className="flex items-center gap-3 mb-5">
@@ -210,8 +196,8 @@ export const GitHubContributions: React.FC = () => {
             </p>
             {/* Total contributions */}
             {!loading && !error && total !== null && (
-              <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full px-4 py-2">
-                <span className="w-2 h-2 rounded-full bg-[#39d353]" />
+              <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full px-4 py-2 hover:border-[#39d353]/30 transition-colors">
+                <span className="w-2 h-2 rounded-full bg-[#39d353] animate-pulse" />
                 <span className="text-[13.5px] text-white/80 font-medium">
                   <span className="font-black text-white">{total.toLocaleString()}</span>
                   {' '}contributions in the last year
@@ -224,21 +210,27 @@ export const GitHubContributions: React.FC = () => {
           </div>
 
           {/* Right — View GitHub button */}
-          <a
-            href={githubConfig.profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white/8 border border-white/12 text-white/70 hover:text-white hover:bg-white/12 text-[13px] font-medium px-5 py-2.5 rounded-full transition-all whitespace-nowrap self-start sm:self-end"
-          >
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-            </svg>
-            <span>View GitHub →</span>
-          </a>
+          <MagneticButton strength={0.2}>
+            <a
+              href={githubConfig.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white/8 border border-white/12 text-white/80 hover:text-white hover:bg-white/14 text-[13px] font-medium px-5 py-2.5 rounded-full transition-all whitespace-nowrap self-start sm:self-end shadow-sm"
+            >
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+              <span>View GitHub →</span>
+            </a>
+          </MagneticButton>
         </div>
 
-        {/* ── Graph card ────────────────────────────── */}
-        <div className="bg-[#0d1117] border border-white/8 rounded-2xl px-6 py-7 sm:px-8 sm:py-8">
+        {/* ── Graph card with Spotlight Glow ───────── */}
+        <SpotlightCard
+          spotlightColor="rgba(38, 166, 65, 0.12)"
+          borderColor="rgba(38, 166, 65, 0.3)"
+          className="bg-[#0d1117] border border-white/8 rounded-2xl px-6 py-7 sm:px-8 sm:py-8"
+        >
 
           {/* Loading */}
           {loading && (
@@ -293,7 +285,7 @@ export const GitHubContributions: React.FC = () => {
                       </text>
                     ))}
 
-                    {/* ── Day-of-week labels (all 7) ── */}
+                    {/* ── Day-of-week labels ── */}
                     {DAY_LABELS.map((label, row) => (
                       <text
                         key={`day-${row}`}
@@ -327,13 +319,13 @@ export const GitHubContributions: React.FC = () => {
                             rx={2}
                             ry={2}
                             fill={FILL[lvl]}
-                            stroke={isHovered ? '#ffffff60' : STROKE[lvl]}
-                            strokeWidth={isHovered ? 1 : 0.5}
+                            stroke={isHovered ? '#ffffff80' : STROKE[lvl]}
+                            strokeWidth={isHovered ? 1.2 : 0.5}
                             style={{
                               cursor: 'pointer',
                               transform: isHovered ? 'scale(1.25)' : 'scale(1)',
                               transformOrigin: `${MARGIN_LEFT + ci * CELL_STEP + CELL_SIZE / 2}px ${MARGIN_TOP + row * CELL_STEP + CELL_SIZE / 2}px`,
-                              transition: 'transform 0.1s ease, stroke 0.1s ease',
+                              transition: 'transform 0.12s ease, stroke 0.12s ease',
                             }}
                             onMouseEnter={() =>
                               setHover({ visible: true, col: ci, row, date: ymd, count: cnt })
@@ -358,7 +350,7 @@ export const GitHubContributions: React.FC = () => {
                         <div
                           style={{
                             background: '#1c2128',
-                            border: '1px solid rgba(255,255,255,0.15)',
+                            border: '1px solid rgba(255,255,255,0.18)',
                             borderRadius: 8,
                             padding: '7px 11px',
                             color: 'white',
@@ -372,7 +364,7 @@ export const GitHubContributions: React.FC = () => {
                           <div style={{ fontWeight: 600, marginBottom: 1 }}>
                             {formatTooltipDate(hover.date)}
                           </div>
-                          <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 11 }}>
+                          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 11 }}>
                             {hover.count === 0
                               ? 'No contributions'
                               : `${hover.count} contribution${hover.count !== 1 ? 's' : ''}`}
@@ -404,7 +396,7 @@ export const GitHubContributions: React.FC = () => {
               </div>
             </div>
           )}
-        </div>
+        </SpotlightCard>
 
         {/* ── Username note ─────────────────────────── */}
         <div className="flex justify-end mt-4">
@@ -412,7 +404,7 @@ export const GitHubContributions: React.FC = () => {
             href={githubConfig.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+            className="text-[12px] text-white/25 hover:text-white/60 transition-colors"
           >
             @{githubConfig.username} on GitHub
           </a>

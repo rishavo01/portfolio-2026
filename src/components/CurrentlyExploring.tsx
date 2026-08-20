@@ -1,5 +1,8 @@
 import React from 'react';
 import { currentlyExploring } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { ShimmerBadge } from './ui/ShimmerBadge';
 
 const GlobeIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -17,8 +20,10 @@ const LinkIcon = () => (
 );
 
 export const CurrentlyExploring: React.FC = () => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
+
   return (
-    <section id="exploring" className="py-20 md:py-28 scroll-mt-16 bg-surface/20">
+    <section id="exploring" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16 bg-surface/20">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -34,9 +39,10 @@ export const CurrentlyExploring: React.FC = () => {
             {currentlyExploring.headline}
           </h2>
           {/* Honest framing badge */}
-          <div className="hidden sm:flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold uppercase tracking-[0.1em] px-3 py-1.5 rounded-full whitespace-nowrap">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            Actively Learning
+          <div className="hidden sm:block">
+            <ShimmerBadge dotColor="bg-amber-500" className="border-amber-200 bg-amber-50/80 text-amber-800">
+              Actively Learning
+            </ShimmerBadge>
           </div>
         </div>
 
@@ -46,13 +52,13 @@ export const CurrentlyExploring: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {currentlyExploring.cards.map((card) => (
-            <div
+            <SpotlightCard
               key={card.title}
-              className="bg-white rounded-2xl p-7 border border-surface hover:border-primary/30 hover:shadow-[0_8px_30px_-6px_rgba(116,180,217,0.10)] transition-all group"
+              className="bg-white rounded-2xl p-7 border border-surface hover:border-primary/40 hover:shadow-[0_8px_30px_-6px_rgba(116,180,217,0.12)] transition-all group"
             >
               {/* Top row */}
               <div className="flex items-start justify-between mb-5">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                   {card.icon === 'globe' ? <GlobeIcon /> : <LinkIcon />}
                 </div>
                 <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full">
@@ -73,7 +79,7 @@ export const CurrentlyExploring: React.FC = () => {
                   {card.topics.map((topic) => (
                     <span
                       key={topic}
-                      className="text-[11.5px] font-medium text-ink/70 bg-surface border border-surface px-3 py-1 rounded-full"
+                      className="text-[11.5px] font-medium text-ink/70 bg-surface border border-surface px-3 py-1 rounded-full group-hover:border-primary/30 transition-colors"
                     >
                       {topic}
                     </span>
@@ -85,7 +91,7 @@ export const CurrentlyExploring: React.FC = () => {
               <p className="text-[11.5px] text-ink/35 italic mt-6 pt-4 border-t border-surface">
                 Learning and experimenting — not yet production experience.
               </p>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

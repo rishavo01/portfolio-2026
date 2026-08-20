@@ -1,5 +1,7 @@
 import React from 'react';
 import { leadership } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 const typeColors: Record<string, string> = {
   'Hackathon':         'bg-primary/10 text-primary border-primary/20',
@@ -8,8 +10,10 @@ const typeColors: Record<string, string> = {
 };
 
 export const Leadership: React.FC = () => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
+
   return (
-    <section id="community" className="py-20 md:py-28 scroll-mt-16">
+    <section id="community" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -32,9 +36,9 @@ export const Leadership: React.FC = () => {
           {leadership.events.map((event) => {
             const typeStyle = typeColors[event.type] ?? 'bg-surface text-ink border-surface';
             return (
-              <div
+              <SpotlightCard
                 key={event.title}
-                className="bg-white rounded-2xl p-6 border border-surface hover:border-primary/30 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.07)] transition-all flex flex-col"
+                className="bg-white rounded-2xl p-6 border border-surface hover:border-primary/40 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.10)] transition-all flex flex-col"
               >
                 {/* Type badge */}
                 <div className="flex items-center justify-between mb-5">
@@ -63,14 +67,14 @@ export const Leadership: React.FC = () => {
                     {event.learned.map((item) => (
                       <span
                         key={item}
-                        className="text-[11px] text-ink/65 bg-surface border border-surface px-2.5 py-1 rounded-full"
+                        className="text-[11px] text-ink/65 bg-surface border border-surface px-2.5 py-1 rounded-full group-hover:border-primary/30 transition-colors"
                       >
                         {item}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>

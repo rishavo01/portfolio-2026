@@ -1,23 +1,27 @@
 import React from 'react';
 import { skills } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
 
-const categoryAccents: Record<string, { label: string; border: string; dot: string }> = {
-  BUILD:       { label: 'text-primary',     border: 'border-primary/20',  dot: 'bg-primary' },
-  DATA:        { label: 'text-green-600',   border: 'border-green-200',   dot: 'bg-green-500' },
-  ENGINEERING: { label: 'text-slate-600',   border: 'border-slate-200',   dot: 'bg-slate-500' },
-  EXPLORING:   { label: 'text-amber-600',   border: 'border-amber-200',   dot: 'bg-amber-500' },
+const categoryAccents: Record<string, { label: string; border: string; dot: string; glow: string }> = {
+  BUILD:       { label: 'text-primary',     border: 'border-primary/20',  dot: 'bg-primary', glow: 'rgba(116, 180, 217, 0.15)' },
+  DATA:        { label: 'text-green-600',   border: 'border-green-200',   dot: 'bg-green-500', glow: 'rgba(34, 197, 94, 0.15)' },
+  ENGINEERING: { label: 'text-slate-600',   border: 'border-slate-200',   dot: 'bg-slate-500', glow: 'rgba(100, 116, 139, 0.15)' },
+  EXPLORING:   { label: 'text-amber-600',   border: 'border-amber-200',   dot: 'bg-amber-500', glow: 'rgba(245, 158, 11, 0.15)' },
 };
 
 const tagBg: Record<string, string> = {
-  BUILD:       'bg-primary/5 border-primary/15 text-primary/80 hover:bg-primary/10',
+  BUILD:       'bg-primary/5 border-primary/15 text-primary/80 hover:bg-primary/10 hover:border-primary/30',
   DATA:        'bg-green-50 border-green-200 text-green-700 hover:bg-green-100',
   ENGINEERING: 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100',
   EXPLORING:   'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100',
 };
 
 export const Skills: React.FC = () => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
+
   return (
-    <section id="skills" className="py-20 md:py-28 scroll-mt-16 bg-surface/20">
+    <section id="skills" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16 bg-surface/20">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -40,9 +44,10 @@ export const Skills: React.FC = () => {
             const accent = categoryAccents[group.category];
             const tags = tagBg[group.category];
             return (
-              <div
+              <SpotlightCard
                 key={group.category}
-                className={`bg-white rounded-2xl p-6 border ${accent.border} hover:shadow-[0_8px_24px_-6px_rgba(22,58,95,0.07)] transition-all`}
+                spotlightColor={accent.glow}
+                className={`bg-white rounded-2xl p-6 border ${accent.border} hover:shadow-[0_8px_24px_-6px_rgba(22,58,95,0.10)] transition-all`}
               >
                 {/* Category header */}
                 <div className="flex items-center gap-2 mb-5">
@@ -57,13 +62,13 @@ export const Skills: React.FC = () => {
                   {group.items.map((item) => (
                     <span
                       key={item}
-                      className={`text-[12px] font-medium px-3 py-1 rounded-full border transition-colors cursor-default ${tags}`}
+                      className={`text-[12px] font-medium px-3 py-1 rounded-full border transition-all cursor-default hover:scale-105 ${tags}`}
                     >
                       {item}
                     </span>
                   ))}
                 </div>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>

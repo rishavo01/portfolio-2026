@@ -1,32 +1,91 @@
-# React + TypeScript + Vite
+# Rishav Kumar Singh — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<p align="center">
+  <img src="./public/preview.png" alt="Portfolio Preview" width="100%" />
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+  <strong>Student Developer · Builder · Mentor</strong>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p align="center">
+  <a href="https://github.com/rishavo01"><img src="https://img.shields.io/badge/GitHub-rishavo01-181717?style=flat&logo=github" alt="GitHub" /></a>
+  <a href="https://www.linkedin.com/in/rishav-singh-521538369/"><img src="https://img.shields.io/badge/LinkedIn-Rishav%20Singh-0A66C2?style=flat&logo=linkedin" alt="LinkedIn" /></a>
+  <a href="https://wa.me/9779809657146"><img src="https://img.shields.io/badge/WhatsApp-+977%209809657146-25D366?style=flat&logo=whatsapp" alt="WhatsApp" /></a>
+  <a href="mailto:rishavkumarsingh012@gmail.com"><img src="https://img.shields.io/badge/Email-rishavkumarsingh012@gmail.com-D14836?style=flat&logo=gmail&logoColor=white" alt="Email" /></a>
+</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✦ About The Project
 
-## Expanding the Oxlint configuration
+A personal portfolio built to showcase real software engineering projects, backend systems, Web3/blockchain explorations, teaching experience, and GitHub contributions.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Designed with an editorial aesthetic using a **Baby Blue + Cream** visual color system.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Key Sections:
+- **Hero & Story**: Narrative focused on learning deeply by building real systems.
+- **Projects**: Featured, full-stack, and experimental applications (Pharmacy Platform, CareConnect, Chemical Inventory, Smart Farming Rover).
+- **Learning Journey**: Structured 8-step roadmap from HTTP fundamentals to system architecture.
+- **Currently Exploring**: Active hands-on learning with Web3 & Blockchain.
+- **GitHub Contributions**: Real-time dynamic SVG heatmap powered by public GitHub activity data.
+- **Teaching**: Mentorship and community teaching impact at National Ideal Boarding School (NIBS).
+- **Skills & Leadership**: Categorized technical proficiencies and hackathon/community involvement (DeerHack, GDG, LOCUS).
+- **Timeline & Contact**: Growth journey and direct contact channels (WhatsApp, Email, LinkedIn, GitHub).
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS v4 (Custom Design System: Baby Blue `#74B4D9` & Cream `#FFFDF3`)
+- **Build Tool**: Vite
+- **Icons**: Custom SVG + Lucide React
+- **Data Integration**: Dynamic GitHub Contribution API
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/rishavo01/portfolio-2026.git
+
+# Navigate into project directory
+cd portfolio-2026
+
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## 📬 Contact
+
+- **Name**: Rishav Kumar Singh
+- **Location**: Nepal
+- **Email**: [rishavkumarsingh012@gmail.com](mailto:rishavkumarsingh012@gmail.com)
+- **WhatsApp**: [+977 9809657146](https://wa.me/9779809657146)
+- **GitHub**: [github.com/rishavo01](https://github.com/rishavo01)
+- **LinkedIn**: [linkedin.com/in/rishav-singh-521538369](https://www.linkedin.com/in/rishav-singh-521538369/)
+
+---
+
+<p align="center">
+  <sub>© 2026 Rishav Kumar Singh. Built with curiosity and code.</sub>
+</p>

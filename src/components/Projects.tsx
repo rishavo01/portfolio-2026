@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { projects } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -22,13 +24,14 @@ const statusDots: Record<string, string> = {
 
 export const Projects: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
 
   const featured = projects.find((p) => p.size === 'featured')!;
   const medium = projects.filter((p) => p.size === 'medium');
   const experimental = projects.find((p) => p.size === 'experimental')!;
 
   return (
-    <section id="projects" className="py-20 md:py-28 scroll-mt-16">
+    <section id="projects" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -47,7 +50,7 @@ export const Projects: React.FC = () => {
 
         {/* === FEATURED === */}
         <div className="mb-6 group">
-          <div className="bg-white rounded-3xl border border-surface overflow-hidden hover:border-primary/30 hover:shadow-[0_12px_40px_-8px_rgba(22,58,95,0.08)] transition-all duration-300">
+          <SpotlightCard className="bg-white rounded-3xl border border-surface overflow-hidden hover:border-primary/40 hover:shadow-[0_12px_40px_-8px_rgba(22,58,95,0.12)] transition-all duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
               <div className="relative overflow-hidden bg-gradient-to-br from-surface to-white min-h-[260px] lg:min-h-[380px]">
@@ -55,9 +58,9 @@ export const Projects: React.FC = () => {
                   src={featured.image}
                   alt={featured.title}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 pointer-events-none" />
               </div>
 
               {/* Content */}
@@ -90,7 +93,7 @@ export const Projects: React.FC = () => {
                       <p className="text-[13.5px] text-ink/75 leading-relaxed">{featured.whatIBuilt}</p>
                     </div>
                     {expandedId === featured.id && (
-                      <div>
+                      <div className="transition-all duration-300">
                         <p className="text-[11px] font-bold text-ink/40 uppercase tracking-widest mb-1">My contribution</p>
                         <p className="text-[13.5px] text-ink/75 leading-relaxed">{featured.myContribution}</p>
                       </div>
@@ -121,7 +124,7 @@ export const Projects: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setExpandedId(expandedId === featured.id ? null : featured.id)}
-                    className="text-[12.5px] font-medium text-primary hover:text-ink transition-colors"
+                    className="text-[12.5px] font-medium text-primary hover:text-ink transition-colors cursor-pointer"
                   >
                     {expandedId === featured.id ? 'Show less' : 'Read more →'}
                   </button>
@@ -150,15 +153,15 @@ export const Projects: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </SpotlightCard>
         </div>
 
         {/* === MEDIUM CARDS === */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {medium.map((project) => (
-            <div
+            <SpotlightCard
               key={project.id}
-              className="bg-white rounded-2xl border border-surface overflow-hidden hover:border-primary/30 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.08)] transition-all duration-300 group flex flex-col"
+              className="bg-white rounded-2xl border border-surface overflow-hidden hover:border-primary/40 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.10)] transition-all duration-300 group flex flex-col"
             >
               {/* Image */}
               <div className="relative overflow-hidden bg-gradient-to-br from-surface to-white h-[200px]">
@@ -166,7 +169,7 @@ export const Projects: React.FC = () => {
                   src={project.image}
                   alt={project.title}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-600 ease-out"
                 />
               </div>
 
@@ -204,13 +207,13 @@ export const Projects: React.FC = () => {
                   </p>
                 )}
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 
         {/* === EXPERIMENTAL === */}
         <div className="group">
-          <div className="bg-gradient-to-r from-surface/60 to-white rounded-2xl border border-surface overflow-hidden hover:border-primary/30 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.06)] transition-all duration-300">
+          <SpotlightCard className="bg-gradient-to-r from-surface/60 to-white rounded-2xl border border-surface overflow-hidden hover:border-primary/40 hover:shadow-[0_8px_30px_-6px_rgba(22,58,95,0.08)] transition-all duration-300">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {/* Image — narrow */}
               <div className="relative overflow-hidden bg-gradient-to-br from-surface to-white h-[200px] md:h-auto">
@@ -218,7 +221,7 @@ export const Projects: React.FC = () => {
                   src={experimental.image}
                   alt={experimental.title}
                   loading="lazy"
-                  className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+                  className="w-full h-full object-cover object-center group-hover:scale-[1.04] transition-transform duration-600 ease-out"
                 />
               </div>
 
@@ -259,7 +262,7 @@ export const Projects: React.FC = () => {
                 )}
               </div>
             </div>
-          </div>
+          </SpotlightCard>
         </div>
 
       </div>

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
 import { hero, personal } from '../data/portfolio';
+import { gsap } from '../lib/gsap';
+import { MagneticButton } from './ui/MagneticButton';
+import { ParticleBackground } from './ui/ParticleBackground';
+import { ShimmerBadge } from './ui/ShimmerBadge';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
@@ -21,8 +25,76 @@ const WhatsAppIcon = () => (
 );
 
 export const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(
+        badgeRef.current,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.7 }
+      )
+        .fromTo(
+          headlineRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.9 },
+          '-=0.4'
+        )
+        .fromTo(
+          textRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7 },
+          '-=0.5'
+        )
+        .fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          '-=0.4'
+        )
+        .fromTo(
+          socialRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 },
+          '-=0.3'
+        )
+        .fromTo(
+          portraitRef.current,
+          { opacity: 0, scale: 0.94, y: 25 },
+          { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power2.out' },
+          '-=0.8'
+        );
+
+      // Subtle ambient float on portrait
+      gsap.to(portraitRef.current, {
+        y: -8,
+        duration: 3.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="home" className="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden scroll-mt-16">
+    <section
+      id="home"
+      ref={containerRef}
+      className="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden scroll-mt-16"
+    >
+      {/* Interactive Particle Constellation */}
+      <ParticleBackground quantity={30} />
+
       {/* Subtle dot-grid background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -42,54 +114,66 @@ export const Hero: React.FC = () => {
           {/* Left: Text */}
           <div id="about-anchor" className="flex flex-col justify-center">
 
-            {/* Tagline pill */}
-            <div className="inline-flex items-center gap-2 mb-6 self-start">
-              <span className="flex gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                <span className="w-1.5 h-1.5 rounded-full bg-primary/25" />
-              </span>
-              <span className="text-[13px] font-medium text-ink/60 tracking-wide uppercase">
-                {hero.greeting}
-              </span>
+            {/* Tagline shimmer pill */}
+            <div ref={badgeRef} className="mb-6 self-start">
+              <ShimmerBadge>
+                <span className="text-[12.5px] font-semibold text-ink tracking-wide uppercase">
+                  {hero.greeting}
+                </span>
+              </ShimmerBadge>
             </div>
 
             {/* Main headline */}
-            <h1 className="text-[38px] sm:text-[46px] lg:text-[52px] font-black tracking-[-0.03em] text-ink leading-[1.06] mb-6">
+            <h1
+              ref={headlineRef}
+              className="text-[38px] sm:text-[46px] lg:text-[52px] font-black tracking-[-0.03em] text-ink leading-[1.06] mb-6"
+            >
               I build software to{' '}
               <em className="not-italic text-primary">understand</em>{' '}
               how technology works —<br className="hidden sm:block" />
               then{' '}
-              <em className="not-italic" style={{ textDecoration: 'underline', textDecorationColor: '#A9D6EE', textDecorationThickness: '3px', textUnderlineOffset: '5px' }}>
+              <em
+                className="not-italic"
+                style={{
+                  textDecoration: 'underline',
+                  textDecorationColor: '#A9D6EE',
+                  textDecorationThickness: '3px',
+                  textUnderlineOffset: '5px',
+                }}
+              >
                 share
               </em>{' '}
               what I learn.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-[15px] text-ink/65 leading-relaxed max-w-[480px] mb-8">
+            <p ref={textRef} className="text-[15px] text-ink/65 leading-relaxed max-w-[480px] mb-8">
               {hero.subtitle}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 mb-10">
-              <a
-                href={hero.primaryCta.href}
-                className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group"
-              >
-                <span>{hero.primaryCta.label}</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </a>
-              <a
-                href={hero.secondaryCta.href}
-                className="inline-flex items-center gap-2 bg-transparent text-ink text-[13.5px] font-medium px-5 py-2.5 rounded-full border border-ink/20 hover:border-ink/50 hover:bg-white transition-all"
-              >
-                {hero.secondaryCta.label}
-              </a>
+            <div ref={ctaRef} className="flex flex-wrap items-center gap-3 mb-10">
+              <MagneticButton strength={0.25}>
+                <a
+                  href={hero.primaryCta.href}
+                  className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group"
+                >
+                  <span>{hero.primaryCta.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </MagneticButton>
+              <MagneticButton strength={0.15}>
+                <a
+                  href={hero.secondaryCta.href}
+                  className="inline-flex items-center gap-2 bg-transparent text-ink text-[13.5px] font-medium px-5 py-2.5 rounded-full border border-ink/20 hover:border-ink/50 hover:bg-white transition-all"
+                >
+                  {hero.secondaryCta.label}
+                </a>
+              </MagneticButton>
             </div>
 
             {/* Social links */}
-            <div className="flex items-center gap-5">
+            <div ref={socialRef} className="flex items-center gap-5">
               <span className="text-[12px] text-ink/40 uppercase tracking-widest font-medium">Find me</span>
               <div className="flex items-center gap-3">
                 <a
@@ -134,10 +218,13 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Right: Portrait with editorial treatment */}
-          <div className="relative flex items-center justify-center min-h-[420px] lg:min-h-[520px]">
+          <div
+            ref={portraitRef}
+            className="relative flex items-center justify-center min-h-[420px] lg:min-h-[520px]"
+          >
             {/* Background accent shapes */}
             <div className="absolute w-[340px] h-[340px] sm:w-[400px] sm:h-[400px] lg:w-[440px] lg:h-[440px] rounded-full bg-gradient-to-br from-surface via-surface/60 to-transparent z-0" />
-            <div className="absolute top-8 right-8 w-24 h-24 rounded-full border border-primary/20 z-0" />
+            <div className="absolute top-8 right-8 w-24 h-24 rounded-full border border-primary/20 z-0 animate-pulse" />
             <div className="absolute bottom-12 left-8 w-16 h-16 rounded-full border border-primary/15 z-0" />
 
             {/* Portrait */}
@@ -153,14 +240,6 @@ export const Hero: React.FC = () => {
             <div className="absolute top-8 left-4 sm:left-0 bg-white/95 backdrop-blur-xs rounded-xl px-3.5 py-2.5 border border-surface shadow-sm z-20">
               <p className="text-[11px] text-ink/50 font-medium uppercase tracking-widest mb-0.5">Based in</p>
               <p className="text-[13px] font-bold text-ink">{personal.destination}</p>
-            </div>
-
-            {/* Floating status tag */}
-            <div className="absolute bottom-8 right-2 sm:right-0 bg-white/95 backdrop-blur-xs rounded-xl px-3.5 py-2.5 border border-surface shadow-sm z-20">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[12px] font-medium text-ink">Open to conversations</span>
-              </div>
             </div>
           </div>
 

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowRight, Mail, MapPin } from 'lucide-react';
 import { contact, personal } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { MagneticButton } from './ui/MagneticButton';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 const GithubIcon = ({ size = 16 }: { size?: number }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
@@ -23,6 +26,7 @@ const WhatsAppIcon = ({ size = 16 }: { size?: number }) => (
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 scroll-mt-16">
+    <section id="contact" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -62,7 +66,7 @@ export const Contact: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white border border-surface rounded-xl px-5 py-4 hover:border-primary/40 hover:shadow-[0_4px_16px_-4px_rgba(116,180,217,0.15)] transition-all group"
               >
-                <div className="w-9 h-9 rounded-lg bg-ink flex items-center justify-center shrink-0 text-white">
+                <div className="w-9 h-9 rounded-lg bg-ink flex items-center justify-center shrink-0 text-white group-hover:scale-105 transition-transform">
                   <GithubIcon size={16} />
                 </div>
                 <div className="flex-1">
@@ -78,7 +82,7 @@ export const Contact: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white border border-surface rounded-xl px-5 py-4 hover:border-primary/40 hover:shadow-[0_4px_16px_-4px_rgba(116,180,217,0.15)] transition-all group"
               >
-                <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 text-white">
+                <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 text-white group-hover:scale-105 transition-transform">
                   <LinkedinIcon size={16} />
                 </div>
                 <div className="flex-1">
@@ -92,7 +96,7 @@ export const Contact: React.FC = () => {
                 href={`mailto:${contact.email}`}
                 className="flex items-center gap-4 bg-white border border-surface rounded-xl px-5 py-4 hover:border-primary/40 hover:shadow-[0_4px_16px_-4px_rgba(116,180,217,0.15)] transition-all group"
               >
-                <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                   <Mail className="w-4 h-4 text-white" />
                 </div>
                 <div className="flex-1">
@@ -108,7 +112,7 @@ export const Contact: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white border border-surface rounded-xl px-5 py-4 hover:border-green-500/40 hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.2)] transition-all group"
               >
-                <div className="w-9 h-9 rounded-lg bg-[#25D366] flex items-center justify-center shrink-0 text-white shadow-sm">
+                <div className="w-9 h-9 rounded-lg bg-[#25D366] flex items-center justify-center shrink-0 text-white shadow-sm group-hover:scale-105 transition-transform">
                   <WhatsAppIcon size={18} />
                 </div>
                 <div className="flex-1">
@@ -131,12 +135,12 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: Form */}
+          {/* Right: Form with SpotlightCard */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl border border-surface p-7 sm:p-8">
+            <SpotlightCard className="bg-white rounded-2xl border border-surface p-7 sm:p-8 hover:border-primary/40 hover:shadow-md transition-all">
               {submitted ? (
                 <div className="py-16 text-center">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4 animate-bounce">
                     <ArrowRight className="w-6 h-6 text-primary -rotate-45" />
                   </div>
                   <h4 className="text-[18px] font-bold text-ink mb-1">Message sent!</h4>
@@ -146,7 +150,7 @@ export const Contact: React.FC = () => {
                 <>
                   <h3 className="text-[18px] font-bold text-ink mb-1">Send a message</h3>
                   <p className="text-[13px] text-ink/50 mb-6">
-                    Or reach out directly via GitHub, LinkedIn, or email.
+                    Or reach out directly via GitHub, LinkedIn, WhatsApp, or email.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -190,17 +194,19 @@ export const Contact: React.FC = () => {
                         className="w-full bg-cream border border-surface rounded-xl px-4 py-2.5 text-[13.5px] text-ink placeholder-ink/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none transition-all"
                       />
                     </div>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group"
-                    >
-                      <span>Send Message</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
+                    <MagneticButton strength={0.15}>
+                      <button
+                        type="submit"
+                        className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group cursor-pointer"
+                      >
+                        <span>Send Message</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    </MagneticButton>
                   </form>
                 </>
               )}
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>

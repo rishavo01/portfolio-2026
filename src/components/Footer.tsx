@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               className="inline-flex items-center mb-4 group transition-transform hover:scale-105"
             >
               <img
-                src="/logo.png"
+                src="/favicon.png"
                 alt="Rishav Logo"
                 className="w-11 h-11 sm:w-12 sm:h-12 object-contain drop-shadow-sm transition-transform duration-200 group-hover:scale-105"
               />

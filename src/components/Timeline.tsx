@@ -1,10 +1,17 @@
 import React from 'react';
 import { timeline, whereImGoing } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 export const Timeline: React.FC = () => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
+
   return (
-    <section id="timeline" className="py-20 md:py-28 bg-ink scroll-mt-16">
-      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+    <section id="timeline" ref={sectionRef} className="py-20 md:py-28 bg-ink scroll-mt-16 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
 
@@ -23,23 +30,23 @@ export const Timeline: React.FC = () => {
             {/* Timeline items */}
             <div className="relative pl-6">
               {/* Vertical line */}
-              <div className="absolute left-0 top-2 bottom-2 w-px bg-white/10" />
+              <div className="absolute left-0 top-2 bottom-2 w-px bg-gradient-to-b from-white/20 via-primary/40 to-primary" />
 
               <div className="space-y-7">
                 {timeline.map((item, idx) => {
                   const isLast = idx === timeline.length - 1;
                   return (
-                    <div key={item.label} className="relative flex items-start gap-4">
+                    <div key={item.label} className="relative flex items-start gap-4 group">
                       {/* Node */}
                       <div
-                        className={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 ${
+                        className={`absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 transition-transform group-hover:scale-125 duration-200 ${
                           isLast
-                            ? 'bg-primary border-primary'
-                            : 'bg-ink border-white/30'
+                            ? 'bg-primary border-primary shadow-[0_0_8px_rgba(116,180,217,0.8)]'
+                            : 'bg-ink border-white/30 group-hover:border-primary'
                         }`}
                       />
                       {/* Content */}
-                      <div className={`pl-5 ${isLast ? 'opacity-100' : 'opacity-70'}`}>
+                      <div className={`pl-5 transition-opacity ${isLast ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`}>
                         <p
                           className={`text-[14px] font-bold mb-0.5 ${
                             isLast ? 'text-primary' : 'text-white'
@@ -72,18 +79,20 @@ export const Timeline: React.FC = () => {
               {whereImGoing.body}
             </p>
 
-            {/* Directions */}
+            {/* Directions with SpotlightCard */}
             <div className="space-y-3">
               {whereImGoing.directions.map((dir, idx) => (
-                <div
+                <SpotlightCard
                   key={dir}
-                  className="flex items-center gap-4 bg-white/5 border border-white/8 rounded-xl px-5 py-3.5 hover:bg-white/8 hover:border-primary/20 transition-all"
+                  spotlightColor="rgba(116, 180, 217, 0.15)"
+                  borderColor="rgba(116, 180, 217, 0.3)"
+                  className="flex items-center gap-4 bg-white/5 border border-white/8 rounded-xl px-5 py-3.5 hover:bg-white/8 hover:border-primary/30 transition-all duration-300"
                 >
                   <span className="text-[11px] font-bold text-primary/60 w-5 tabular-nums">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
                   <span className="text-[14px] font-semibold text-white/80">{dir}</span>
-                </div>
+                </SpotlightCard>
               ))}
             </div>
 

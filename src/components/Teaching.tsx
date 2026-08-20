@@ -1,9 +1,13 @@
 import React from 'react';
 import { teaching } from '../data/portfolio';
+import { useScrollReveal } from '../lib/gsap';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 export const Teaching: React.FC = () => {
+  const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
+
   return (
-    <section id="teaching" className="py-20 md:py-28 scroll-mt-16">
+    <section id="teaching" ref={sectionRef} className="py-20 md:py-28 scroll-mt-16">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
 
         {/* Section label */}
@@ -29,15 +33,15 @@ export const Teaching: React.FC = () => {
             </p>
 
             {/* Where */}
-            <div className="bg-white border border-surface rounded-2xl p-5 mb-5">
+            <SpotlightCard className="bg-white border border-surface rounded-2xl p-5 mb-5 hover:border-primary/40 hover:shadow-xs transition-all">
               <p className="text-[11px] text-ink/40 uppercase tracking-widest font-bold mb-1">Program</p>
               <p className="text-[14px] font-semibold text-ink">{teaching.program}</p>
-            </div>
-            <div className="bg-white border border-surface rounded-2xl p-5">
+            </SpotlightCard>
+            <SpotlightCard className="bg-white border border-surface rounded-2xl p-5 hover:border-primary/40 hover:shadow-xs transition-all">
               <p className="text-[11px] text-ink/40 uppercase tracking-widest font-bold mb-1">Where I taught</p>
               <p className="text-[14px] font-semibold text-ink">{teaching.where}</p>
               <p className="text-[12px] text-ink/50 mt-0.5">Where I also once studied</p>
-            </div>
+            </SpotlightCard>
           </div>
 
           {/* Right: Flow + Topics + Student Projects */}
@@ -50,7 +54,7 @@ export const Teaching: React.FC = () => {
                 {teaching.flow.map((step, idx) => (
                   <React.Fragment key={step}>
                     <div className="flex flex-col items-center">
-                      <div className={`px-4 py-2 rounded-xl text-[12.5px] font-bold tracking-wide ${
+                      <div className={`px-4 py-2 rounded-xl text-[12.5px] font-bold tracking-wide shadow-2xs ${
                         step === 'TAUGHT' || step === 'RETURNED'
                           ? 'bg-primary text-white'
                           : 'bg-white text-ink border border-surface'
@@ -67,19 +71,19 @@ export const Teaching: React.FC = () => {
             </div>
 
             {/* Topics taught */}
-            <div className="bg-white border border-surface rounded-2xl p-6">
+            <SpotlightCard className="bg-white border border-surface rounded-2xl p-6 hover:border-primary/40 transition-all">
               <p className="text-[11px] font-bold text-ink/40 uppercase tracking-widest mb-4">Topics taught</p>
               <div className="flex flex-wrap gap-2">
                 {teaching.topics.map((topic) => (
                   <span
                     key={topic}
-                    className="text-[12.5px] font-medium text-ink bg-surface border border-surface px-3 py-1.5 rounded-full"
+                    className="text-[12.5px] font-medium text-ink bg-surface border border-surface px-3 py-1.5 rounded-full hover:border-primary/30 hover:text-primary transition-all cursor-default"
                   >
                     {topic}
                   </span>
                 ))}
               </div>
-            </div>
+            </SpotlightCard>
 
             {/* Student projects */}
             <div>
@@ -90,7 +94,7 @@ export const Teaching: React.FC = () => {
                 {teaching.studentProjects.map((project) => (
                   <div
                     key={project}
-                    className="flex items-start gap-2.5 bg-white border border-surface rounded-xl p-3.5"
+                    className="flex items-start gap-2.5 bg-white border border-surface rounded-xl p-3.5 hover:border-primary/40 hover:shadow-2xs transition-all"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                     <span className="text-[13px] text-ink/75">{project}</span>
