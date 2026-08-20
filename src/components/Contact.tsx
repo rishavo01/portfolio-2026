@@ -102,6 +102,22 @@ export const Contact: React.FC = () => {
                 <ArrowRight className="w-4 h-4 text-ink/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
               </a>
 
+              <a
+                href={personal.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-white border border-surface rounded-xl px-5 py-4 hover:border-green-500/40 hover:shadow-[0_4px_16px_-4px_rgba(37,211,102,0.2)] transition-all group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[#25D366] flex items-center justify-center shrink-0 text-white shadow-sm">
+                  <WhatsAppIcon size={18} />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[13.5px] font-semibold text-ink group-hover:text-green-600 transition-colors">WhatsApp</p>
+                  <p className="text-[12px] text-ink/45">{personal.phone}</p>
+                </div>
+                <ArrowRight className="w-4 h-4 text-ink/30 group-hover:text-green-600 group-hover:translate-x-0.5 transition-all" />
+              </a>
+
               {/* Location */}
               <div className="flex items-center gap-4 bg-surface/40 border border-surface rounded-xl px-5 py-3.5">
                 <div className="w-9 h-9 rounded-lg bg-white border border-surface flex items-center justify-center shrink-0">
