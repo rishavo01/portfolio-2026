@@ -10,18 +10,6 @@ const GithubIcon = () => (
   </svg>
 );
 
-const statusColors: Record<string, string> = {
-  green: 'bg-green-50 text-green-700 border-green-200',
-  blue: 'bg-blue-50 text-blue-700 border-blue-200',
-  amber: 'bg-amber-50 text-amber-700 border-amber-200',
-};
-
-const statusDots: Record<string, string> = {
-  green: 'bg-green-500',
-  blue: 'bg-blue-500',
-  amber: 'bg-amber-500',
-};
-
 export const Projects: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
@@ -74,23 +62,15 @@ export const Projects: React.FC = () => {
                   )}
 
                   {/* Top meta */}
-                  <div className="flex items-center justify-between gap-3 mb-6">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] font-bold text-primary/70 uppercase tracking-[0.12em]">
-                        {featured.category}
-                      </span>
-                      {featured.founderBadge && (
-                        <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold text-cream bg-ink px-2.5 py-1 rounded-full">
-                          {featured.founderBadge}
-                        </span>
-                      )}
-                    </div>
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full border shrink-0 ${statusColors[featured.statusColor]}`}
-                    >
-                      <span className={`w-1.5 h-1.5 rounded-full ${statusDots[featured.statusColor]}`} />
-                      {featured.status}
+                  <div className="flex items-center gap-2 flex-wrap mb-6">
+                    <span className="text-[11px] font-bold text-primary/70 uppercase tracking-[0.12em]">
+                      {featured.category}
                     </span>
+                    {featured.founderBadge && (
+                      <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold text-cream bg-ink px-2.5 py-1 rounded-full">
+                        {featured.founderBadge}
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="text-[24px] sm:text-[28px] font-black text-ink tracking-tight mb-4 leading-snug">
@@ -189,15 +169,9 @@ export const Projects: React.FC = () => {
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3">
                   <span className="text-[11px] font-bold text-primary uppercase tracking-[0.1em]">
                     {project.category}
-                  </span>
-                  <span
-                    className={`inline-flex items-center gap-1.5 text-[10.5px] font-medium px-2.5 py-0.5 rounded-full border ${statusColors[project.statusColor]}`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${statusDots[project.statusColor]}`} />
-                    {project.status}
                   </span>
                 </div>
 
@@ -268,15 +242,9 @@ export const Projects: React.FC = () => {
 
               {/* Content */}
               <div className="md:col-span-2 p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="mb-4">
                   <span className="text-[11px] font-bold text-amber-600 uppercase tracking-[0.1em]">
                     Experimental · {experimental.category}
-                  </span>
-                  <span
-                    className={`inline-flex items-center gap-1.5 text-[10.5px] font-medium px-2.5 py-0.5 rounded-full border ${statusColors[experimental.statusColor]}`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${statusDots[experimental.statusColor]}`} />
-                    {experimental.status}
                   </span>
                 </div>
 

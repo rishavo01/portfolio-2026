@@ -73,8 +73,6 @@ export interface Project {
   problemStatement: string;
   whatIBuilt: string;
   myContribution: string;
-  status: string;
-  statusColor: 'green' | 'blue' | 'amber';
   tech: string[];
   image: string;
   github?: string;
@@ -97,8 +95,6 @@ export const projects: Project[] = [
       'A multi-store pharmacy management platform with inventory management, medicine tracking, stock transfers, sales, finance, analytics, reports, user roles, real-time notifications, and role-based access control.',
     myContribution:
       'Founder & primary builder — responsible for product development, technical architecture, implementation, deployment, and continuous improvement.',
-    status: 'Active Development',
-    statusColor: 'green',
     tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'JWT', 'RBAC', 'Socket.IO'],
     image: '/assets/project1.jpg',
     demo: 'https://meropharma.com',
@@ -116,8 +112,6 @@ export const projects: Project[] = [
       'A healthcare appointment management app with patient booking flow, admin dashboard, appointment tracking, and database-backed API.',
     myContribution:
       'Built the frontend/backend architecture, designed the appointment flow, and implemented the admin management system.',
-    status: 'Completed',
-    statusColor: 'blue',
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
     image: '/assets/project2.jpg',
     demo: 'https://careconnect.rishavsingh.com.np/',
@@ -135,8 +129,6 @@ export const projects: Project[] = [
       'A full-stack inventory management system with a Spring Boot backend, REST APIs, JPA database layer, and Angular frontend — including expiry warning functionality.',
     myContribution:
       'Built the Java backend with Spring Boot, designed REST APIs, integrated Spring Data JPA with MySQL, and built the Angular frontend with full frontend/backend integration.',
-    status: 'Completed',
-    statusColor: 'blue',
     tech: ['Java', 'Spring Boot', 'Angular', 'Spring Data JPA', 'MySQL', 'REST APIs'],
     image: '/assets/project3.jpg',
     demo: 'https://chemical-inventory.rishavsingh.com.np/',
@@ -154,8 +146,6 @@ export const projects: Project[] = [
       'A rocker-bogie mechanism rover with green color detection, plant tracking, and leaf image capture. The rover captured leaf images for AI-based plant health analysis.',
     myContribution:
       'I trained the AI model used to analyze leaf images. Krishi AI is designed to detect whether a plant is healthy or diseased, identify the type of disease when detected, and suggest a possible treatment.',
-    status: 'Exhibition Project',
-    statusColor: 'amber',
     tech: ['Python', 'Computer Vision', 'AI Model Training', 'Rocker-Bogie Mechanism', 'Green Color Detection'],
     image: '/assets/project4.jpg',
     note: 'Team project presented at the 30th SET Exhibition, St. Xavier\'s College, Maitighar — Inter-College category. We didn\'t win, but the project gave me practical experience in AI model training, computer vision, agriculture-focused problem solving, hardware integration, and teamwork. The learning mattered more than the result.',
@@ -215,7 +205,7 @@ export const skills = [
   {
     category: 'EXPLORING',
     color: 'amber',
-    items: ['AI', 'Computer Vision', 'LLMs', 'AI Agents', 'RAG'],
+    items: ['Web3', 'Blockchain', 'Smart Contracts', 'dApps', 'Wallets'],
   },
 ];
 
@@ -226,7 +216,6 @@ export const currentlyExploring = {
   cards: [
     {
       title: 'Web3 Development',
-      status: 'Currently Learning',
       description:
         'Exploring decentralized application architecture, wallets, blockchain networks, Web3 APIs, and how applications interact with decentralized systems.',
       topics: ['Web3', 'dApps', 'Wallets', 'Blockchain APIs', 'Decentralized Applications'],
@@ -234,7 +223,6 @@ export const currentlyExploring = {
     },
     {
       title: 'Blockchain',
-      status: 'Currently Learning',
       description:
         'Learning the fundamentals of blockchain technology, including how transactions, blocks, consensus, smart contracts, and decentralized networks work.',
       topics: ['Blockchain Fundamentals', 'Smart Contracts', 'Transactions', 'Consensus', 'Decentralized Networks'],
@@ -264,7 +252,7 @@ export const leadership = {
       highlight: 'First time organizing a hackathon. Learned more from the chaos than from any class.',
     },
     {
-      title: 'GDG Kathmandu / DevFest 2024',
+      title: 'GDG Kathmandu / DevFest 2024-2026',
       role: 'Community Member',
       type: 'Tech Community',
       description:
@@ -306,8 +294,12 @@ export interface ExperienceEntry {
   number: string;
   eyebrow: string;
   title: string;
+  type?: string;
+  dateRange?: string;
   duration?: string;
+  location?: string;
   description: string;
+  description2?: string;
   focus: string[];
   current?: boolean;
   highlight?: string;
@@ -319,23 +311,42 @@ export const experience = {
   entries: [
     {
       number: '01',
-      eyebrow: 'Internship',
-      title: 'Software Development Intern',
+      eyebrow: 'Deerwalk Sifal School',
+      title: 'Intern',
+      type: 'Internship',
+      dateRange: 'Feb 2025 – Present',
       description:
-        'Gained practical experience working on software development in a professional environment, learning how real development workflows differ from classroom projects.',
-      focus: ['Software Development', 'Team Collaboration', 'Professional Workflow', 'Problem Solving'],
+        'Gained practical experience through an internship at Deerwalk Sifal School, working with visual web development and WordPress.',
+      focus: ['Visual Web Development', 'WordPress'],
     },
     {
       number: '02',
-      eyebrow: 'Inspired I.T. Services',
-      title: 'Software Developer',
-      duration: '~5 months',
+      eyebrow: 'Deerwalk Sifal School',
+      title: 'Volunteer Web Development Instructor',
+      type: 'Community Hours Program · Volunteer',
+      dateRange: 'Jun 2026 – Jul 2026',
+      duration: '2 months',
+      location: 'Budhanilkantha, Nepal · On-site',
       description:
-        'Worked on real-world software and technology projects, gaining experience with application development, deployment, infrastructure, and solving practical client problems.',
-      focus: ['Full-Stack Development', 'Backend Development', 'Deployment', 'Linux / VPS', 'Client Projects', 'Problem Solving'],
+        "Volunteered as a Web Development Instructor through Deerwalk Sifal School's Community Hours Program, teaching a one-month MERN Stack course to Class 12 students at National Ideal Boarding School (NIBS).",
+      description2:
+        'Guided students in building real-world web applications while covering HTML, CSS, JavaScript, React, Node.js, Express.js, MongoDB, Git, and REST APIs.',
+      focus: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Express.js', 'MongoDB', 'Git', 'REST APIs'],
     },
     {
       number: '03',
+      eyebrow: 'Inspired IT Services Pvt. Ltd.',
+      title: 'Project Lead',
+      type: 'Full-time',
+      dateRange: 'May 2026 – Aug 2026',
+      duration: '4 months',
+      location: 'Nepal · On-site',
+      description:
+        'Worked as a Project Lead at Inspired IT Services Pvt. Ltd. on a full-time basis.',
+      focus: ['Project Leadership', 'Team Coordination', 'Problem Solving'],
+    },
+    {
+      number: '04',
       eyebrow: 'MeroPharma',
       title: 'Founder & Builder',
       current: true,

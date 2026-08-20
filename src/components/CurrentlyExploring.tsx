@@ -2,7 +2,6 @@ import React from 'react';
 import { currentlyExploring } from '../data/portfolio';
 import { useScrollReveal } from '../lib/gsap';
 import { SpotlightCard } from './ui/SpotlightCard';
-import { ShimmerBadge } from './ui/ShimmerBadge';
 
 const GlobeIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -34,17 +33,9 @@ export const CurrentlyExploring: React.FC = () => {
           <span className="flex-1 max-w-[48px] h-px bg-primary/30" />
         </div>
 
-        <div className="flex items-end justify-between gap-6 mb-12">
-          <h2 className="text-[32px] sm:text-[38px] font-black tracking-[-0.03em] text-ink leading-tight">
-            {currentlyExploring.headline}
-          </h2>
-          {/* Honest framing badge */}
-          <div className="hidden sm:block">
-            <ShimmerBadge dotColor="bg-amber-500" className="border-amber-200 bg-amber-50/80 text-amber-800">
-              Actively Learning
-            </ShimmerBadge>
-          </div>
-        </div>
+        <h2 className="text-[32px] sm:text-[38px] font-black tracking-[-0.03em] text-ink leading-tight mb-12">
+          {currentlyExploring.headline}
+        </h2>
 
         <p className="text-[15px] text-ink/60 max-w-[540px] leading-relaxed mb-12">
           {currentlyExploring.intro}
@@ -57,14 +48,10 @@ export const CurrentlyExploring: React.FC = () => {
               className="bg-white rounded-2xl p-7 border border-surface hover:border-primary/40 hover:shadow-[0_8px_30px_-6px_rgba(116,180,217,0.12)] transition-all group"
             >
               {/* Top row */}
-              <div className="flex items-start justify-between mb-5">
+              <div className="mb-5">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                   {card.icon === 'globe' ? <GlobeIcon /> : <LinkIcon />}
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                  {card.status}
-                </span>
               </div>
 
               <h3 className="text-[20px] font-bold text-ink mb-3">{card.title}</h3>

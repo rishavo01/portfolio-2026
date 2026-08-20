@@ -59,28 +59,31 @@ export const Experience: React.FC = () => {
                       >
                         {entry.eyebrow}
                       </span>
-                      {entry.duration && (
-                        <span className="text-[11px] text-ink/40 font-medium">· {entry.duration}</span>
-                      )}
-                      {isCurrent && (
-                        <span className="ml-auto inline-flex items-center gap-1.5 text-[10.5px] font-bold text-primary bg-primary/10 border border-primary/25 px-2.5 py-1 rounded-full">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                          Present
-                        </span>
-                      )}
                     </div>
 
                     <h3
-                      className={`font-bold text-ink mb-3 leading-snug ${
+                      className={`font-bold text-ink mb-1.5 leading-snug ${
                         isCurrent ? 'text-[20px] sm:text-[22px]' : 'text-[17px] sm:text-[18px]'
                       }`}
                     >
                       {entry.title}
                     </h3>
 
-                    <p className="text-[13.5px] text-ink/65 leading-relaxed mb-5 max-w-[540px]">
+                    {(entry.type || entry.dateRange || entry.duration || entry.location) && (
+                      <p className="text-[11.5px] text-ink/45 font-medium mb-4">
+                        {[entry.type, entry.dateRange, entry.duration, entry.location].filter(Boolean).join(' · ')}
+                      </p>
+                    )}
+
+                    <p className={`text-[13.5px] text-ink/65 leading-relaxed max-w-[540px] ${entry.description2 ? 'mb-3' : 'mb-5'}`}>
                       {entry.description}
                     </p>
+
+                    {entry.description2 && (
+                      <p className="text-[13.5px] text-ink/65 leading-relaxed mb-5 max-w-[540px]">
+                        {entry.description2}
+                      </p>
+                    )}
 
                     {entry.highlight && (
                       <p className="text-[13px] text-primary/90 font-medium italic mb-5 border-l-2 border-primary/30 pl-3">

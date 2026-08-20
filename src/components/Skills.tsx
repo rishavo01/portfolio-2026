@@ -1,13 +1,21 @@
 import React from 'react';
+import { Code2, Database, Settings2, Compass } from 'lucide-react';
 import { skills } from '../data/portfolio';
 import { useScrollReveal } from '../lib/gsap';
 import { SpotlightCard } from './ui/SpotlightCard';
 
-const categoryAccents: Record<string, { label: string; border: string; dot: string; glow: string }> = {
-  BUILD:       { label: 'text-primary',     border: 'border-primary/20',  dot: 'bg-primary', glow: 'rgba(116, 180, 217, 0.15)' },
-  DATA:        { label: 'text-green-600',   border: 'border-green-200',   dot: 'bg-green-500', glow: 'rgba(34, 197, 94, 0.15)' },
-  ENGINEERING: { label: 'text-slate-600',   border: 'border-slate-200',   dot: 'bg-slate-500', glow: 'rgba(100, 116, 139, 0.15)' },
-  EXPLORING:   { label: 'text-amber-600',   border: 'border-amber-200',   dot: 'bg-amber-500', glow: 'rgba(245, 158, 11, 0.15)' },
+const categoryAccents: Record<string, { label: string; border: string; iconBg: string; glow: string }> = {
+  BUILD:       { label: 'text-primary',     border: 'border-primary/20',  iconBg: 'bg-primary/10',  glow: 'rgba(116, 180, 217, 0.15)' },
+  DATA:        { label: 'text-green-600',   border: 'border-green-200',   iconBg: 'bg-green-50',    glow: 'rgba(34, 197, 94, 0.15)' },
+  ENGINEERING: { label: 'text-slate-600',   border: 'border-slate-200',   iconBg: 'bg-slate-50',    glow: 'rgba(100, 116, 139, 0.15)' },
+  EXPLORING:   { label: 'text-amber-600',   border: 'border-amber-200',   iconBg: 'bg-amber-50',    glow: 'rgba(245, 158, 11, 0.15)' },
+};
+
+const categoryIcons: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  BUILD: Code2,
+  DATA: Database,
+  ENGINEERING: Settings2,
+  EXPLORING: Compass,
 };
 
 const tagBg: Record<string, string> = {
@@ -43,18 +51,28 @@ export const Skills: React.FC = () => {
           {skills.map((group) => {
             const accent = categoryAccents[group.category];
             const tags = tagBg[group.category];
+            const Icon = categoryIcons[group.category];
             return (
               <SpotlightCard
                 key={group.category}
                 spotlightColor={accent.glow}
-                className={`bg-white rounded-2xl p-6 border ${accent.border} hover:shadow-[0_8px_24px_-6px_rgba(22,58,95,0.10)] transition-all`}
+                className={`group bg-white rounded-2xl p-6 border ${accent.border} hover:shadow-[0_10px_32px_-8px_rgba(22,58,95,0.12)] hover:-translate-y-1 transition-all duration-300`}
               >
                 {/* Category header */}
-                <div className="flex items-center gap-2 mb-5">
-                  <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
-                  <p className={`text-[11px] font-black uppercase tracking-[0.15em] ${accent.label}`}>
-                    {group.category}
-                  </p>
+                <div className="flex items-center gap-3 mb-6">
+                  <div
+                    className={`w-10 h-10 rounded-xl border ${accent.border} ${accent.iconBg} ${accent.label} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300`}
+                  >
+                    <Icon className="w-[18px] h-[18px]" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <p className={`text-[11px] font-black uppercase tracking-[0.15em] ${accent.label}`}>
+                      {group.category}
+                    </p>
+                    <p className="text-[11px] text-ink/35 font-medium mt-0.5">
+                      {group.items.length} {group.items.length === 1 ? 'skill' : 'skills'}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Tags */}
