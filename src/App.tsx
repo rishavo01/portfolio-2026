@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { FeaturedProjects } from './components/FeaturedProjects';
-import { ServicesClients } from './components/ServicesClients';
-import { Experience } from './components/Experience';
-import { PricingProcess } from './components/PricingProcess';
-import { ContactCTA } from './components/ContactCTA';
+import { About } from './components/About';
+import { Projects } from './components/Projects';
+import { LearningJourney } from './components/LearningJourney';
+import { Teaching } from './components/Teaching';
+import { Skills } from './components/Skills';
+import { Leadership } from './components/Leadership';
+import { Timeline } from './components/Timeline';
+import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
 export function App() {
   useEffect(() => {
-    // On a cold load with a URL hash (e.g. /#projects), the target section
-    // isn't in the DOM yet when the browser attempts its native fragment
-    // scroll, so it either misses or lands under the sticky header. Redo it
-    // once the app has mounted.
     if (window.location.hash) {
       const el = document.getElementById(window.location.hash.slice(1));
       if (el) {
@@ -25,31 +24,40 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-ink font-['Inter',sans-serif] selection:bg-primary/20 selection:text-ink">
-      {/* 1. Header */}
+    <div className="min-h-screen bg-cream text-ink selection:bg-primary/30 selection:text-ink">
+      {/* Navigation */}
       <Header />
 
       <main>
-        {/* 2. Hero Section */}
+        {/* 1. Hero */}
         <Hero />
 
-        {/* 3. Featured Projects */}
-        <FeaturedProjects />
+        {/* 2. About */}
+        <About />
 
-        {/* 4. Services + Trusted Clients */}
-        <ServicesClients />
+        {/* 3. Projects */}
+        <Projects />
 
-        {/* 5. Experience & Leadership */}
-        <Experience />
+        {/* 4. Learning Journey */}
+        <LearningJourney />
 
-        {/* 6. Pricing + Design Process */}
-        <PricingProcess />
+        {/* 5. Teaching */}
+        <Teaching />
 
-        {/* 7. Contact CTA */}
-        <ContactCTA />
+        {/* 6. Skills */}
+        <Skills />
+
+        {/* 7. Leadership & Community */}
+        <Leadership />
+
+        {/* 8. Timeline + Where I'm Going */}
+        <Timeline />
+
+        {/* 9. Contact */}
+        <Contact />
       </main>
 
-      {/* 8. Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

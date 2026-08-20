@@ -1,264 +1,297 @@
-import {
-  Atom,
-  Blocks,
-  BookOpen,
-  Braces,
-  Building2,
-  Cable,
-  Calculator,
-  Code,
-  Coffee,
-  Compass,
-  Database,
-  FileCode,
-  FileText,
-  GitBranch,
-  GraduationCap,
-  Hammer,
-  Layout,
-  MessageCircle,
-  Palette,
-  Pill,
-  Route,
-  Rocket,
-  Server,
-  Brain,
-  Users,
-  Zap,
-} from 'lucide-react';
+// ============================================================
+// PORTFOLIO DATA — Rishav Kumar Singh
+// ============================================================
 
 export const personal = {
   fullName: 'Rishav Kumar Singh',
   firstName: 'Rishav',
-  brandName: 'Rishav',
-  role: 'Founder & Software Developer',
-  product: 'MeroPharma',
+  tagline: 'Student Developer · Builder · Mentor',
   location: 'Nepal',
-  about:
-    "I'm Rishav Kumar Singh, a software developer and founder from Nepal. I enjoy building practical software products like MeroPharma, exploring modern technologies, and sharing what I learn with others.",
-  education: {
-    school: 'Deerwalk Sifal School',
-    level: '+2 Science',
-  },
+  destination: 'Nepal',
+  school: 'Deerwalk Sifal School',
+  level: '+2 Science',
+  email: 'rishavkumarsingh012@gmail.com',
+  github: 'https://github.com/rishavo01',
+  linkedin: 'https://www.linkedin.com/in/rishav-singh-521538369/',
+  cv: '#',
 };
 
 export const hero = {
-  greeting: "Hi, I'm Rishav 👋",
-  headline: {
-    line1: 'I Build Software',
-    line2: 'That Solves Real',
-    highlight: 'Problems.',
-  },
+  greeting: 'Student Developer · Builder · Mentor',
+  headline: 'I build software to understand how technology works — then share what I learn.',
   subtitle:
-    "I'm a software developer and founder focused on building practical technology products, learning modern engineering, and solving real-world problems through software.",
+    'Computer science student from Nepal exploring full-stack development, backend engineering, AI, and DevOps through real projects.',
   primaryCta: { label: 'View My Work', href: '#projects' },
-  secondaryCta: { label: 'Download CV', href: '#' },
-  credibility: {
-    line1: 'Founder • Developer • Builder',
-    line2: `${personal.education.school} — ${personal.education.level}`,
-    icons: [Code, GraduationCap, Users, Rocket],
-  },
-  statCard: {
-    value: 'Founder',
-    label: personal.product,
-  },
-  aiCard: {
-    title: 'AI-Assisted Dev',
-    text: 'Exploring AI-assisted tools and workflows.',
-  },
+  secondaryCta: { label: 'About Me', href: '#about' },
   portrait: {
     src: '/assets/hero_portrait.png',
     alt: 'Rishav Kumar Singh',
   },
 };
 
+export const about = {
+  headline: 'I learn by building.',
+  story: `I'm Rishav — a student developer from Nepal exploring software engineering through real projects, backend development, AI, and DevOps.
+I started with programming fundamentals and gradually moved from basic Java concepts to backend development,
+full-stack applications, deployment, AI, and DevOps. Not through courses alone — through building real things,
+breaking them, debugging them, deploying them, and then teaching others what I learned.`,
+  philosophy: 'Frameworks change. Fundamentals stay.',
+  motif: ['LEARN', 'BUILD', 'BREAK', 'DEBUG', 'DEPLOY', 'TEACH', 'REPEAT'],
+  pillars: [
+    {
+      label: 'I BUILD',
+      title: 'Real Software',
+      desc: 'Full-stack applications, APIs, pharmacy platforms, healthcare systems — built and deployed.',
+    },
+    {
+      label: 'I LEARN',
+      title: 'By Going Deeper',
+      desc: 'Not just tutorials. Understanding how HTTP works, how databases work, how systems are built.',
+    },
+    {
+      label: 'I SHARE',
+      title: 'What I Know',
+      desc: 'Teaching web development to students, mentoring, participating in tech communities.',
+    },
+  ],
+  technologies: [
+    'Java', 'Spring Boot', 'Angular', 'JavaScript', 'React', 'Node.js',
+    'Express', 'MongoDB', 'PostgreSQL', 'Python', 'AI / Computer Vision',
+    'Linux', 'VPS', 'Git', 'Deployment', 'DevOps fundamentals',
+  ],
+};
+
 export interface Project {
   id: number;
+  slug: string;
   title: string;
   category: string;
-  description: string;
+  size: 'featured' | 'medium' | 'experimental';
+  problemStatement: string;
+  whatIBuilt: string;
+  myContribution: string;
+  status: string;
+  statusColor: 'green' | 'blue' | 'amber';
   tech: string[];
-  icon: typeof Pill;
+  image: string;
+  github?: string;
+  demo?: string;
+  note?: string;
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'MeroPharma',
-    category: 'Pharmacy Management Platform',
-    description:
-      'A pharmacy management platform designed to help pharmacies manage medicines, inventory, sales, users, and day-to-day operations.',
-    tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Prisma', 'PostgreSQL'],
-    icon: Pill,
+    slug: 'pharmacy-platform',
+    title: 'Pharmacy Management Platform',
+    category: 'Full-Stack Product',
+    size: 'featured',
+    problemStatement:
+      'Pharmacies managing multiple stores had no unified system for inventory, sales, finance, and staff across locations.',
+    whatIBuilt:
+      'A multi-store pharmacy ERP with inventory management, medicine tracking, stock transfers, sales, finance, analytics, reports, user roles, real-time notifications, and role-based access control.',
+    myContribution:
+      'Designed the full system architecture, built the backend API with Node.js + Express + Prisma, implemented authentication, RBAC, and real-time functionality with Socket.IO, and developed the React frontend.',
+    status: 'Active Development',
+    statusColor: 'green',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'JWT', 'RBAC', 'Socket.IO'],
+    image: '/assets/project1.jpg',
+    note: 'A serious full-stack product built to solve operational problems in pharmacy management.',
   },
   {
     id: 2,
-    title: 'PharmaCore',
-    category: 'Multi-Tenant Pharmacy ERP',
-    description:
-      'A multi-store pharmacy ERP with inventory, finance, analytics, user management, role-based access control, and real-time functionality.',
-    tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'Socket.IO'],
-    icon: Building2,
+    slug: 'careconnect',
+    title: 'CareConnect',
+    category: 'Healthcare Application',
+    size: 'medium',
+    problemStatement:
+      'Patients had no easy way to book medical appointments, and clinics had no centralized system to manage them.',
+    whatIBuilt:
+      'A healthcare appointment management app with patient booking flow, admin dashboard, appointment tracking, and database-backed API.',
+    myContribution:
+      'Built the frontend/backend architecture, designed the appointment flow, and implemented the admin management system.',
+    status: 'Completed',
+    statusColor: 'blue',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
+    image: '/assets/project2.jpg',
+    note: 'Presented at CodeWalk — technology innovation exhibition at Deerwalk Sifal School.',
   },
   {
     id: 3,
-    title: 'MERN Chat App',
+    slug: 'chemical-inventory',
+    title: 'Chemical Inventory System',
     category: 'Full-Stack Application',
-    description: 'A real-time chat application built with modern frontend and backend technologies.',
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
-    icon: MessageCircle,
+    size: 'medium',
+    problemStatement:
+      'Chemical labs needed a system to track inventory, manage expiry dates, and avoid critical shortages.',
+    whatIBuilt:
+      'A full-stack inventory management system with a Spring Boot backend, REST APIs, JPA database layer, and Angular frontend — including expiry warning functionality.',
+    myContribution:
+      'Built the Java backend with Spring Boot, designed REST APIs, integrated Spring Data JPA with MySQL, and built the Angular frontend with full frontend/backend integration.',
+    status: 'Completed',
+    statusColor: 'blue',
+    tech: ['Java', 'Spring Boot', 'Angular', 'Spring Data JPA', 'MySQL', 'REST APIs'],
+    image: '/assets/project3.jpg',
+    note: 'Built while learning Java backend development — this project demonstrates learning through implementation.',
   },
   {
     id: 4,
-    title: 'Engineering Web Tools',
-    category: 'Interactive Web Applications',
-    description: 'Browser-based tools including a Mole Calculator, Projectile Motion tool, and Complex Number Calculator.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    icon: Calculator,
+    slug: 'farming-rover',
+    title: 'Smart Farming Helper Rover',
+    category: 'Hardware + AI Project',
+    size: 'experimental',
+    problemStatement:
+      'Small-scale farmers needed a low-cost way to monitor plant health without manual inspection of every plant.',
+    whatIBuilt:
+      'A rocker-bogie mechanism rover with green color detection, plant tracking, and leaf image capture. The rover captured leaf images for AI-based plant health analysis.',
+    myContribution:
+      'Trained the AI model for leaf disease identification — intended to detect healthy vs. diseased plants, identify disease type, and suggest possible treatments.',
+    status: 'Exhibition Project',
+    statusColor: 'amber',
+    tech: ['Python', 'Computer Vision', 'AI Model Training', 'Rocker-Bogie Mechanism'],
+    image: '/assets/project4.jpg',
+    note: 'Team project at the 30th SET Exhibition, St. Xavier\'s College. The learning mattered more than the result.',
   },
 ];
 
-export const services = [
+export const learningJourney = {
+  title: "I Learn in Public",
+  subtitle: "A structured Java learning challenge that took me from fundamentals to real backend development.",
+  philosophy: "Frameworks change. Fundamentals stay.",
+  steps: [
+    { number: '01', label: 'Java Fundamentals', desc: 'Variables, types, control flow, syntax' },
+    { number: '02', label: 'Object-Oriented Programming', desc: 'Classes, inheritance, polymorphism, encapsulation' },
+    { number: '03', label: 'Collections & Multithreading', desc: 'Data structures, generics, concurrency basics' },
+    { number: '04', label: 'Databases & JDBC', desc: 'SQL, relational databases, Java DB connectivity' },
+    { number: '05', label: 'Spring Boot', desc: 'Application framework, dependency injection, configuration' },
+    { number: '06', label: 'REST APIs', desc: 'HTTP methods, request/response, API design' },
+    { number: '07', label: 'Spring Data JPA', desc: 'ORM, repository pattern, database abstraction' },
+    { number: '08', label: 'Backend Fundamentals', desc: 'HTTP, servlets, server architecture, deployment' },
+  ],
+};
+
+export const teaching = {
+  headline: 'I learned by building.',
+  subheadline: 'Then I started teaching.',
+  story: `I studied at National Ideal Boarding School until Class 10. Years later, I returned to the same school — 
+this time as an instructor. Through Deerwalk Sifal School's Community Hours Program, I taught web development 
+to Class 12 students at my own former school. That full circle mattered more than any certificate.`,
+  flow: ['STUDENT', 'LEARNED', 'BUILT', 'RETURNED', 'TAUGHT'],
+  program: "Deerwalk Sifal School — Community Hours Program",
+  where: 'National Ideal Boarding School',
+  topics: ['HTML', 'CSS', 'JavaScript', 'Git', 'React', 'APIs', 'Node.js', 'Express', 'MongoDB'],
+  studentProjects: [
+    '3D interactive website',
+    'Weather application',
+    'Gym website',
+    'JavaScript todo list',
+  ],
+};
+
+export const skills = [
   {
-    title: 'Full-Stack Development',
-    desc: 'Building practical web applications using modern frontend and backend technologies.',
-    icon: Layout,
+    category: 'BUILD',
+    color: 'blue',
+    items: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'Spring Boot', 'Angular'],
   },
   {
-    title: 'Product Development',
-    desc: 'Turning real-world problems into usable software products.',
-    icon: Rocket,
+    category: 'DATA',
+    color: 'green',
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'JPA'],
   },
   {
-    title: 'Backend & APIs',
-    desc: 'Building scalable APIs, authentication, databases, and backend systems.',
-    icon: Server,
+    category: 'ENGINEERING',
+    color: 'slate',
+    items: ['REST APIs', 'Authentication', 'RBAC', 'Git', 'Linux', 'VPS', 'Nginx', 'Docker', 'DevOps'],
   },
   {
-    title: 'AI & Modern Development',
-    desc: 'Exploring AI-assisted development, automation, APIs, and modern developer tools.',
-    icon: Brain,
+    category: 'EXPLORING',
+    color: 'amber',
+    items: ['AI', 'Computer Vision', 'LLMs', 'AI Agents', 'RAG'],
   },
 ];
 
-export const technologies = [
-  { name: 'React', icon: Atom },
-  { name: 'TypeScript', icon: FileCode },
-  { name: 'JavaScript', icon: Braces },
-  { name: 'Node.js', icon: Server },
-  { name: 'Express', icon: Route },
-  { name: 'PostgreSQL', icon: Database },
-  { name: 'Prisma', icon: Blocks },
-  { name: 'Tailwind CSS', icon: Palette },
-  { name: 'Vite', icon: Zap },
-  { name: 'Socket.IO', icon: Cable },
-  { name: 'Java', icon: Coffee },
-  { name: 'Git', icon: GitBranch },
-  { name: 'GitHub', icon: Code },
+export const leadership = {
+  headline: "Beyond the Code",
+  subtitle: "I actively learn from the developer community outside my own projects.",
+  events: [
+    {
+      title: 'DeerHack School Edition',
+      role: 'Organizer',
+      type: 'Hackathon',
+      description:
+        'My first experience organizing a hackathon — student-led planning, coordination, and execution. Working under pressure to create opportunities for younger students.',
+      learned: ['Leadership', 'Logistics', 'Team coordination', 'Problem solving', 'Event execution'],
+      highlight: 'First time organizing a hackathon. Learned more from the chaos than from any class.',
+    },
+    {
+      title: 'GDG Kathmandu / DevFest 2024',
+      role: 'Community Member',
+      type: 'Tech Community',
+      description:
+        'Active participant in the GDG Kathmandu developer community since DevFest 2024.',
+      learned: ['AI Agents', 'Gemma', 'LLMs', 'RAG', 'AI security', 'Firebase', 'Gemini', 'Google Wallet', 'Developer tooling'],
+      highlight: 'Exploring cutting-edge AI topics with the broader developer community.',
+    },
+    {
+      title: 'LOCUS 2026',
+      role: 'Participant',
+      type: 'National Festival',
+      description:
+        '22nd National Technological Festival at Pulchowk Campus — one of Nepal\'s largest student-run technology events.',
+      learned: ['Networking', 'Exposure to engineering projects', 'National tech community'],
+      highlight: 'Pulchowk Campus · 22nd National Technological Festival',
+    },
+  ],
+};
+
+export const timeline = [
+  { label: 'Early Learning', desc: 'Programming fundamentals, first steps in code' },
+  { label: 'Java', desc: 'Backend foundations, OOP, Spring Boot' },
+  { label: 'Full Stack', desc: 'Spring Boot + Angular, frontend/backend integration' },
+  { label: 'Real Products', desc: 'Healthcare + Inventory + Pharmacy platforms' },
+  { label: 'Deployment', desc: 'Linux, VPS, domains, production systems' },
+  { label: 'AI', desc: 'Computer Vision, LLM exploration, AI agents' },
+  { label: 'Teaching', desc: 'Community Hours, mentoring Class 12 students' },
+  { label: 'Leadership', desc: 'Hackathon organization, GDG community' },
+  { label: 'Next', desc: 'Deeper exploration of Software Engineering, AI, Backend Systems, and Infrastructure' },
 ];
 
-export const experience = [
-  {
-    title: `Founder — ${personal.product}`,
-    desc: 'Building and developing a pharmacy management platform focused on solving practical problems in pharmacy operations.',
-    icon: Pill,
-  },
-  {
-    title: 'Startup Experience',
-    desc: 'Worked with a startup for approximately five months, gaining practical experience with software development, teamwork, product thinking, and real-world delivery.',
-    icon: Rocket,
-  },
-  {
-    title: 'Coding Educator & Community Contributor',
-    desc: 'Taught coding to students through community and educational programs, with a focus on practical programming and web development.',
-    icon: BookOpen,
-  },
-];
-
-export const focusAreas = [
-  {
-    label: 'BUILD',
-    title: 'Real-World Projects',
-    items: ['Full-stack applications', 'SaaS products', 'Backend APIs', 'Database systems'],
-    highlighted: false,
-  },
-  {
-    label: 'LEARN',
-    title: 'Continuous Growth',
-    items: ['Software engineering', 'AI-assisted development', 'Backend engineering', 'System architecture'],
-    highlighted: true,
-    badge: 'CURRENT FOCUS',
-  },
-  {
-    label: 'SHARE',
-    title: 'Community Impact',
-    items: ['Teaching coding', 'Workshops', 'Student mentorship', 'Technology communities'],
-    highlighted: false,
-  },
-];
-
-export const process = [
-  {
-    number: '01. Identify',
-    desc: 'Understand the real problem, users, and requirements.',
-    icon: Compass,
-  },
-  {
-    number: '02. Plan',
-    desc: 'Design the architecture, technology stack, database, and development approach.',
-    icon: FileText,
-  },
-  {
-    number: '03. Build',
-    desc: 'Develop the frontend, backend, APIs, database, authentication, and core functionality.',
-    icon: Hammer,
-  },
-  {
-    number: '04. Improve',
-    desc: 'Test, deploy, collect feedback, fix problems, and continuously improve the product.',
-    icon: Rocket,
-  },
-];
+export const whereImGoing = {
+  headline: "Where I'm Going",
+  body: `I'm still figuring out exactly where I want to specialize. For now, I'm deliberately exploring the intersection of software engineering, backend systems, AI, and infrastructure.`,
+  directions: ['Software Engineering', 'Backend Engineering', 'AI', 'Developer Infrastructure', 'DevOps'],
+};
 
 export const contact = {
-  heading: "Let's Build Something Useful Together",
-  subtitle: "Have an idea, project, or opportunity? Let's connect and build something meaningful.",
-  email: 'your-email@example.com',
+  heading: "Let's build something useful.",
+  body: "I'm always interested in meeting people who are building, learning, teaching, or solving interesting problems with technology.",
+  email: personal.email,
   location: personal.location,
-  availability: 'Open to opportunities',
-  projectTypes: ['Software Project', 'Collaboration', 'Internship / Opportunity', 'University / Academic', 'Other'],
+  destination: personal.destination,
+  availability: 'Open to conversations',
+  projectTypes: ['General', 'Collaboration', 'Internship / Opportunity', 'University / Academic', 'Other'],
 };
 
-export const footer = {
-  name: personal.fullName,
-  description:
-    'Software developer and founder focused on building useful products, learning continuously, and sharing technology with others.',
-  quickLinks: [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Process', href: '#process' },
-    { label: 'Contact', href: '#contact' },
-  ],
-  resources: [
-    { label: 'My Focus', href: '#pricing' },
-    { label: 'Skills', href: '#services' },
-    { label: 'Process', href: '#process' },
-  ],
-};
+export const certifications = [
+  {
+    title: 'Python for Data Analysis',
+    issuer: 'Simplilearn SkillUp',
+    topics: ['Python', 'NumPy', 'Pandas', 'Matplotlib', 'Data Analysis'],
+  },
+];
 
-export const portfolioData = {
+export default {
   personal,
   hero,
+  about,
   projects,
-  services,
-  technologies,
-  experience,
-  focusAreas,
-  process,
+  learningJourney,
+  teaching,
+  skills,
+  leadership,
+  timeline,
+  whereImGoing,
   contact,
-  footer,
+  certifications,
 };
-
-export default portfolioData;

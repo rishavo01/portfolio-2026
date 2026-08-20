@@ -5,33 +5,46 @@ html {
 }
 
 @theme {
-  /* Brand color system — Professional Blue Palette */
-  --color-primary: #2F4B6E;
-  --color-accent: #6FA6D6;
-  --color-accent-soft: #A9C8E8;
-  --color-surface: #CFE3F6;
-  --color-background-soft: #E6F1FA;
+  /* Brand color system — Baby Blue + Cream Identity */
+  --color-primary: #74B4D9;
+  --color-baby-blue: #74B4D9;
+  --color-cream: #FFFDF3;
+  --color-dark-blue: #163A5F;
+  --color-ink: #163A5F;
+  --color-text: #163A5F;
+  --color-accent: #74B4D9;
+  --color-soft-blue: #A9D6EE;
+  --color-accent-soft: #A9D6EE;
+  --color-light-blue: #DCEFF8;
+  --color-surface: #DCEFF8;
+  --color-background-soft: #DCEFF8;
   --color-white: #FFFFFF;
-  --color-ink: #111827;
-  --color-text: #111827;
 }
 
 :root {
-  --color-primary: #2F4B6E;
-  --color-accent: #6FA6D6;
-  --color-accent-soft: #A9C8E8;
-  --color-surface: #CFE3F6;
-  --color-background-soft: #E6F1FA;
+  --baby-blue: #74B4D9;
+  --cream: #FFFDF3;
+  --dark-blue: #163A5F;
+  --soft-blue: #A9D6EE;
+  --light-blue: #DCEFF8;
+  --white: #FFFFFF;
+  --color-primary: #74B4D9;
+  --color-cream: #FFFDF3;
+  --color-dark-blue: #163A5F;
+  --color-ink: #163A5F;
+  --color-accent: #74B4D9;
+  --color-soft-blue: #A9D6EE;
+  --color-light-blue: #DCEFF8;
+  --color-surface: #DCEFF8;
+  --color-background-soft: #DCEFF8;
   --color-white: #FFFFFF;
-  --color-ink: #111827;
-  --color-text: #111827;
 }
 
 @layer base {
   body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     color: var(--color-ink);
-    background-color: #ffffff;
+    background-color: var(--cream);
   }
 }
 
@@ -42,14 +55,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #E6F1FA;
+  background: #FFFDF3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CFE3F6;
+  background: #DCEFF8;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6FA6D6;
+  background: #74B4D9;
 }
