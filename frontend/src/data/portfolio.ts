@@ -20,9 +20,9 @@ export const personal = {
 
 export const hero = {
   greeting: 'Student Developer · Builder · Mentor',
-  headline: 'I build software to understand how technology works — then share what I learn.',
+  headline: 'I build software to solve real problems — as a founder, developer, and builder.',
   subtitle:
-    'Student developer, builder, and founder from Nepal exploring full-stack development, backend engineering, AI, Web3, and DevOps through real projects.',
+    'Founder of MeroPharma, a pharmacy inventory management system, and a student developer from Nepal.',
   primaryCta: { label: 'View My Work', href: '#projects' },
   secondaryCta: { label: 'About Me', href: '#about' },
   portrait: {

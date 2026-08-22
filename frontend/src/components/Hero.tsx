@@ -122,9 +122,9 @@ export const Hero: React.FC = () => {
               className="text-[38px] sm:text-[46px] lg:text-[52px] font-black tracking-[-0.03em] text-ink leading-[1.06] mb-6"
             >
               I build software to{' '}
-              <em className="not-italic text-primary">understand</em>{' '}
-              how technology works —<br className="hidden sm:block" />
-              then{' '}
+              <em className="not-italic text-primary">solve real problems</em>{' '}
+              —<br className="hidden sm:block" />
+              as a founder, developer, and{' '}
               <em
                 className="not-italic"
                 style={{
@@ -134,9 +134,8 @@ export const Hero: React.FC = () => {
                   textUnderlineOffset: '5px',
                 }}
               >
-                share
-              </em>{' '}
-              what I learn.
+                builder
+              </em>.
             </h1>
 
             {/* Subtitle */}
