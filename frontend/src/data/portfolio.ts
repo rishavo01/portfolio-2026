@@ -131,6 +131,7 @@ export const projects: Project[] = [
       'Built the Java backend with Spring Boot, designed REST APIs, integrated Spring Data JPA with MySQL, and built the Angular frontend with full frontend/backend integration.',
     tech: ['Java', 'Spring Boot', 'Angular', 'Spring Data JPA', 'MySQL', 'REST APIs'],
     image: '/assets/project3.jpg',
+    github: 'https://github.com/rishavo01/Chemical-inventory',
     demo: 'https://chemical-inventory.rishavsingh.com.np/',
     note: 'Built while learning Java backend development — this project demonstrates learning through implementation.',
   },
@@ -148,6 +149,7 @@ export const projects: Project[] = [
       'I trained the AI model used to analyze leaf images. Krishi AI is designed to detect whether a plant is healthy or diseased, identify the type of disease when detected, and suggest a possible treatment.',
     tech: ['Python', 'Computer Vision', 'AI Model Training', 'Rocker-Bogie Mechanism', 'Green Color Detection'],
     image: '/assets/project4.jpg',
+    github: 'https://github.com/rishavo01/KrishiAI',
     note: 'Team project presented at the 30th SET Exhibition, St. Xavier\'s College, Maitighar — Inter-College category. We didn\'t win, but the project gave me practical experience in AI model training, computer vision, agriculture-focused problem solving, hardware integration, and teamwork. The learning mattered more than the result.',
   },
 ];

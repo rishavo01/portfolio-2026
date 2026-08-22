@@ -13,6 +13,7 @@ import { Leadership } from './components/Leadership';
 import { Timeline } from './components/Timeline';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 
 export function App() {
   useEffect(() => {
@@ -71,6 +72,8 @@ export function App() {
 
       {/* Footer */}
       <Footer />
+
+      <FloatingWhatsApp />
     </div>
   );
 }

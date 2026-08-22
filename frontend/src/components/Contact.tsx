@@ -23,18 +23,40 @@ const WhatsAppIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const sectionRef = useScrollReveal<HTMLDivElement>({ y: 35, duration: 0.85 });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 4000);
+    if (status === 'sending') return;
+
+    setStatus('sending');
+    setErrorMessage('');
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const result = await res.json();
+
+      if (res.ok && result.success) {
+        setStatus('sent');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 4000);
+      } else {
+        setStatus('error');
+        setErrorMessage(result.error || 'Something went wrong sending your message.');
+      }
+    } catch {
+      setStatus('error');
+      setErrorMessage('Could not reach the server. Please try again in a moment.');
+    }
   };
 
   return (
@@ -138,7 +160,7 @@ export const Contact: React.FC = () => {
           {/* Right: Form with SpotlightCard */}
           <div className="lg:col-span-7">
             <SpotlightCard className="bg-white rounded-2xl border border-surface p-7 sm:p-8 hover:border-primary/40 hover:shadow-md transition-all">
-              {submitted ? (
+              {status === 'sent' ? (
                 <div className="py-16 text-center">
                   <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4 animate-bounce">
                     <ArrowRight className="w-6 h-6 text-primary -rotate-45" />
@@ -194,12 +216,19 @@ export const Contact: React.FC = () => {
                         className="w-full bg-cream border border-surface rounded-xl px-4 py-2.5 text-[13.5px] text-ink placeholder-ink/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none transition-all"
                       />
                     </div>
+                    {status === 'error' && (
+                      <p className="text-[12.5px] text-red-500">
+                        {errorMessage} If this keeps happening, reach out via email or WhatsApp instead.
+                      </p>
+                    )}
+
                     <MagneticButton strength={0.15}>
                       <button
                         type="submit"
-                        className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group cursor-pointer"
+                        disabled={status === 'sending'}
+                        className="inline-flex items-center gap-2 bg-ink text-cream text-[13.5px] font-medium px-6 py-2.5 rounded-full hover:bg-primary transition-all shadow-sm group cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        <span>Send Message</span>
+                        <span>{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </button>
                     </MagneticButton>
