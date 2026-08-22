@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Right: Social icons + CTA */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-2">
           <a
             href={personal.github}
             target="_blank"
@@ -148,7 +148,7 @@ export const Header: React.FC = () => {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-ink rounded-full hover:bg-ink/5 transition-colors"
+          className="lg:hidden p-2 text-ink rounded-full hover:bg-ink/5 transition-colors"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -157,7 +157,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-cream border-b border-surface px-6 py-5 space-y-1">
+        <div className="lg:hidden bg-cream border-b border-surface px-6 py-5 space-y-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
